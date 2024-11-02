@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="szklo">#183804</color>
+    <color name="papier">#0A2843</color>
+    <color name="metal">#412F09</color>
+    <color name="Bio">#290D02</color>
+    <color name="gray">#888</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
