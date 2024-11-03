@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_green_bg"
+    >
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="-125dp"
+        android:alpha=".6"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/shape1_light"
+        app:srcCompat="@drawable/shape1_light" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="500dp"
+        android:layout_marginBottom="-160dp"
+        android:alpha=".6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/shape2_light"
+        app:srcCompat="@drawable/shape2_light" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="414dp"
+        android:layout_height="560dp"
+        android:layout_marginBottom="-190dp"
+        android:alpha=".5"
+        android:src="@drawable/shape3_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/shape3_light" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="530dp"
+        android:background="@drawable/przycisk_zatwierdz"
+        android:text="Zatwierdź"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="109dp"
+        android:layout_height="39dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/przycisk_pomin"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/button2"
+            android:layout_width="71dp"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:paddingStart="15dp"
+            android:text="Pomiń"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            tools:layout_editor_absoluteX="285dp"
+            tools:layout_editor_absoluteY="16dp"
+
+            />
+
+        <ImageView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:src="@drawable/right_arrow_white" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="130dp"
+        android:layout_height="265dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/planet_earth"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/planet_earth" />
+
+    <EditText
+        android:id="@+id/editTextTextEmailAddress"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="380dp"
+        android:background="@drawable/pole_input"
+        android:elevation="2dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="15dp"
+        android:text="Email"
+        android:textColor="@color/light_gray_input_text"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="450dp"
+        android:background="@drawable/pole_input"
+        android:elevation="2dp"
+        android:ems="10"
+        android:inputType="text"
+        android:paddingLeft="15dp"
+        android:text="Hasło"
+        android:textColor="@color/light_gray_input_text"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="320dp"
+        android:text="Zaloguj się"
+        android:textColor="@color/light_gray_text"
+        android:textFontWeight="500"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:paddingRight="5dp"
+            android:text="@string/zarejestruj"
+            android:textFontWeight="500"
+            android:textSize="15dp">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:text="@string/zarejestruj_underline"
+            android:textFontWeight="500"
+            android:textSize="15dp">
+
+        </TextView>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

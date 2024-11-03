@@ -12,4 +12,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="light_green_bg">#DEF2CF</color>
+    <color name="dark_green_bg">#4D7B1F</color>
+
+    <color name="gray_text">#3D413A</color>
+    <color name="light_gray_text">#DEF2CF</color>
+
+    <color name="light_gray_input_text">#969696</color>
+    
 </resources>

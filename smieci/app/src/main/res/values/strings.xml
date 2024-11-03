@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Smieci</string>
     <string name="NajblizszyWywoz">Najbliższy wywóz śmieci:</string>
+
+
+    <string name="zaloguj">Masz już konto?</string>
+    <string name="zaloguj_underline"><u>Zaloguj się</u></string>
+    <string name="zarejestruj">Nie masz jeszcze konta?</string>
+    <string name="zarejestruj_underline"><u>Zarejestruj się</u></string>
 </resources>
