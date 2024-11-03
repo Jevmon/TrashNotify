@@ -33,4 +33,12 @@
         \n<font color="#3FC838">WRZUCAĆ:</font> odpadki warzywne i owocowe (obierki itp.), drobne gałązki drzew i krzewów, skoszoną trawę, liście, kwiaty, trociny i korę drzew, resztki jedzenia (bez mięs), skorupki od jajek, fusy po kawie i herbacie.
         \n<font color="#E51717">NIE WRZUCAĆ:</font> kości zwierząt, resztek mięsa, worków foliowych, odchodów zwierzęcych, drewna impregnowanego, płyt wiórowych i MDF, kamieni.
     </string>
+
+    <!-- Logowanie -->
+
+    <string name="zaloguj">Masz już konto?</string>
+    <string name="zaloguj_underline"><u>Zaloguj się</u></string>
+    <string name="zarejestruj">Nie masz jeszcze konta?</string>
+    <string name="zarejestruj_underline"><u>Zarejestruj się</u></string>
+
 </resources>
