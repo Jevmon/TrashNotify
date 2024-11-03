@@ -1,10 +1,36 @@
 <resources>
     <string name="app_name">Smieci</string>
     <string name="NajblizszyWywoz">Najbliższy wywóz śmieci:</string>
+    <string name="papiery">papiery</string>
+    <string name="szklo">szkło</string>
+    <string name="bio">bio</string>
+    <string name="metale">metale i tworzywa sztuczne</string>
+    <string name="Wywozka_papiery">Wywózka odpadów papierowych</string>
+    <string name="Wywozka_szklo">Wywózka odpadów szklanych</string>
+    <string name="Wywozka_bio">Wywózka odpadów biodegradowalnych</string>
+    <string name="Wywozka_metal">Wywózka odpadów metalowych i tworzyw sztucznych </string>
 
+    <!-- Zasady segregacji -->
 
-    <string name="zaloguj">Masz już konto?</string>
-    <string name="zaloguj_underline"><u>Zaloguj się</u></string>
-    <string name="zarejestruj">Nie masz jeszcze konta?</string>
-    <string name="zarejestruj_underline"><u>Zarejestruj się</u></string>
+    <string name="ZasadySegregacji"><b>Zasady segregacji śmieci:</b></string>
+    <string name="OpisMetal">
+        \n<font color="#CDB500"><b><u>Metale i tworzywa sztuczne:</u></b></font>
+        \n<font color="#3FC838">WRZUCAĆ:</font>  butelki po napojach (zgniecione butelki PET), opakowania z tworzyw sztucznych, opakowania wielomateriałowe (np. kartony po mleku, sokach-zgniecione), reklamówki i inne folie (niezabrudzone), puszki po napojach i konserwach, folię aluminiową (niezabrudzoną), opakowania po chemii gospodarczej, doniczki plastikowe.
+        \n<font color="#E51717">NIE WRZUCAĆ:</font> butelek i pojemników z zawartością, leków i zużytych artykułów medycznych, części samochodowych, zużytych baterii i akumulatorów, zużytego sprzętu elektrycznego i AGD tworzyw piankowych, gum, silikonów, pieluch jednorazowych (pampersów), podpasek, ubrań.
+    </string>
+    <string name="OpisPapier">
+        \n<font color="#137CC8"><b><u>Papier:</u></b></font>
+        \n<font color="#3FC838">WRZUCAĆ:</font> opakowania z papieru, tektury, kartonu(złożone), gazety i czasopisma, katalogi i ulotki, papier, zadrukowane kartki, książki i zeszyty, torebki i worki papierowe, papier pakowy.
+        \n<font color="#E51717">NIE WRZUCAĆ:</font> papieru zabrudzonego, zatłuszczonego, wilgotnego lub mokrego, papieru na stałe zgrzanego z folią, opakowań wielomateriałowych (np. kartonów po mleku i napojach), pieluch jednorazowych i podpasek, zużytych ręczników kuchennych i chusteczek higienicznych, papierowych worków (np. po cemencie, nawozach i innych materiałach budowlanych), tapet.
+    </string>
+    <string name="OpisSzklo">
+        \n<font color="#098C0D"><b><u>Szkło:</u></b></font>
+        \n<font color="#3FC838">WRZUCAĆ:</font> czyste opakowania szklane (puste), butelki, słoiki, flakony.
+        \n<font color="#E51717">NIE WRZUCAĆ:</font> ceramiki, doniczek, porcelany, kryształów, szkła żaroodpornego, żarówek i świetlówek, reflektorów, luster, szyb (np. samochodowych i okiennych), termometrów, stłuczki szklanej.
+    </string>
+    <string name="OpisBio">
+        \n<font color="#671E08"><b><u>Bio:</u></b></font>
+        \n<font color="#3FC838">WRZUCAĆ:</font> odpadki warzywne i owocowe (obierki itp.), drobne gałązki drzew i krzewów, skoszoną trawę, liście, kwiaty, trociny i korę drzew, resztki jedzenia (bez mięs), skorupki od jajek, fusy po kawie i herbacie.
+        \n<font color="#E51717">NIE WRZUCAĆ:</font> kości zwierząt, resztek mięsa, worków foliowych, odchodów zwierzęcych, drewna impregnowanego, płyt wiórowych i MDF, kamieni.
+    </string>
 </resources>
