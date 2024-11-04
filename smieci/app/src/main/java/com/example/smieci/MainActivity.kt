@@ -82,7 +82,8 @@ class MainActivity : ComponentActivity() {
 
             //Wypisywanie dzisiejszej daty
 
-            tekstWybranaData.setText("$dzien.$miesiac.$rok")
+            val datka = "$dzien.$miesiac.$rok"
+            tekstWybranaData.setText(datka)
 
         kalendarz.setOnDateChangeListener { kalendarz, year, month, day ->
             val WybranaData = "$day.${month+1}.$year"
