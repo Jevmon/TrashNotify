@@ -4,14 +4,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.ActionMenuView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+
+
+        </androidx.appcompat.widget.ActionMenuView>
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/Baner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -57,6 +69,7 @@
                 />
 
             <TextView
+                android:id="@+id/termin_najblizszego_wywozu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/papiery"
@@ -89,6 +102,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/WybranaData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="05.01.2024"
