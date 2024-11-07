@@ -1,6 +1,8 @@
 package com.example.smieci
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -13,6 +15,11 @@ class Logowanie : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = LogowanieBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        findViewById<LinearLayout>(R.id.linearLayoutPomin).setOnClickListener{
+            val intent_informacje = Intent(this, DodawanieInformacji::class.java)
+            startActivity(intent_informacje)
+        }
     }
 
 }
