@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_green">
+
+    <ImageView
+        android:id="@+id/userIcon"
+        android:layout_width="130dp"
+        android:layout_height="265dp"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/planet_earth"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/planet_earth" />
+    <ImageView
+        android:id="@+id/imageWave1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="-125dp"
+        android:alpha=".6"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/shape1"
+        app:srcCompat="@drawable/shape1" />
+
+    <ImageView
+        android:id="@+id/imageWave2"
+        android:layout_width="wrap_content"
+        android:layout_height="500dp"
+        android:layout_marginBottom="-160dp"
+        android:alpha=".6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/shape2"
+        app:srcCompat="@drawable/shape2" />
+
+    <ImageView
+        android:id="@+id/imageWave3"
+        android:layout_width="414dp"
+        android:layout_height="560dp"
+        android:layout_marginBottom="-190dp"
+        android:alpha=".5"
+        android:src="@drawable/shape3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/shape3" />
+
+    <TextView
+        android:id="@+id/textPotwierdz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:text="@string/tekst_lokalizacja_potw"
+        android:textColor="@color/gray_text"
+        android:textFontWeight="500"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="644dp"
+        android:background="@drawable/przycisk_zatwierdz"
+        android:text="@string/zatwierdz"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/editText_Gmina"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="370dp"
+        android:background="@drawable/pole_input"
+        android:ems="10"
+        android:inputType="text"
+        android:padding="12dp"
+        android:paddingStart="15dp"
+        android:text="@string/gmina_input"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textGmina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="340dp"
+        android:text="@string/gmina"
+        android:textColor="@color/gray_text"
+        android:textFontWeight="500"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textMiejscowosc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="430dp"
+        android:text="@string/miejscowosc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="18sp"
+        android:textColor="@color/gray_text"
+        android:textFontWeight="500"/>
+
+    <TextView
+        android:id="@+id/textUlica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="520dp"
+        android:text="@string/ulica"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="18sp"
+        android:textColor="@color/gray_text"
+        android:textFontWeight="500"/>
+
+    <EditText
+        android:id="@+id/editTextMiejscowosc"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="460dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/miejscowosc_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/pole_input"
+        android:padding="12dp"
+        android:paddingStart="15dp"
+        android:textSize="16sp"/>
+
+    <EditText
+        android:id="@+id/editTextUlica"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="550dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/ulica_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/pole_input"
+        android:padding="12dp"
+        android:paddingStart="15dp"
+        android:textSize="16sp"/>
+
+    <ImageView
+        android:id="@+id/imageEdit3"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="560dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/edit_text_icon" />
+
+    <ImageView
+        android:id="@+id/imageEdit1"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="380dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/edit_text_icon" />
+
+    <ImageView
+        android:id="@+id/imageEdit2"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="472dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/edit_text_icon" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

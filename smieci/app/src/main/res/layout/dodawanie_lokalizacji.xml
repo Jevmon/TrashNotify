@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_green">
+
+    <ImageView
+        android:id="@+id/imageWave1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="-125dp"
+        android:alpha=".6"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/shape1"
+        app:srcCompat="@drawable/shape1" />
+
+    <ImageView
+        android:id="@+id/imageWave2"
+        android:layout_width="wrap_content"
+        android:layout_height="500dp"
+        android:layout_marginBottom="-160dp"
+        android:alpha=".6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/shape2"
+        app:srcCompat="@drawable/shape2" />
+
+    <ImageView
+        android:id="@+id/imageWave3"
+        android:layout_width="414dp"
+        android:layout_height="560dp"
+        android:layout_marginBottom="-190dp"
+        android:alpha=".5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/shape3"
+        app:srcCompat="@drawable/shape3" />
+
+    <ImageView
+        android:id="@+id/userIcon"
+        android:layout_width="130dp"
+        android:layout_height="265dp"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/planet_earth"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/planet_earth" />
+
+    <TextView
+        android:id="@+id/textDodaj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:text="@string/tekst_lokalizacja"
+        android:textColor="@color/gray_text"
+        android:textFontWeight="500"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textLub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="615dp"
+        android:text="@string/lub"
+        android:textColor="@color/gray_text"
+        android:textFontWeight="500"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonSubmit"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="560dp"
+        android:background="@drawable/przycisk_zatwierdz"
+        android:text="@string/zatwierdz"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonUzyjLokalizacji"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="648dp"
+        android:background="@drawable/przycisk_zatwierdz"
+        android:text="@string/uzyj_loka"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

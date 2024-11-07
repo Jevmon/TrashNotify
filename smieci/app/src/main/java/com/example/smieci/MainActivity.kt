@@ -26,6 +26,11 @@ class MainActivity : ComponentActivity() {
         binding = MainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        val intent_logowanie = Intent(this, Logowanie::class.java)
+        startActivity(intent_logowanie)
+
+
         //Ogólne funkcje i dane
 
         fun DateHandle(datePart : String) : String{
@@ -90,6 +95,7 @@ class MainActivity : ComponentActivity() {
             tekstWybranaData.setText(WybranaData)
 
         }
+
 
 
     }

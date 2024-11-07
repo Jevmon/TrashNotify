@@ -34,11 +34,66 @@
         \n<font color="#E51717">NIE WRZUCAĆ:</font> kości zwierząt, resztek mięsa, worków foliowych, odchodów zwierzęcych, drewna impregnowanego, płyt wiórowych i MDF, kamieni.
     </string>
 
-    <!-- Logowanie -->
+    <!-- Rejestracja -->
+    <string name="zarejestruj">Zarejetruj się</string>
+    <string name="konto">Masz już konto?</string>
+    <string name="konto_zaloguj"><u>Zaloguj się</u></string>
 
-    <string name="zaloguj">Masz już konto?</string>
-    <string name="zaloguj_underline"><u>Zaloguj się</u></string>
-    <string name="zarejestruj">Nie masz jeszcze konta?</string>
-    <string name="zarejestruj_underline"><u>Zarejestruj się</u></string>
+    <!-- Logowanie -->
+    <string name="zaloguj">Zaloguj się</string>
+    <string name="brak_konta">Nie masz jeszcze konta?</string>
+    <string name="brak_konta_zaloguj"><u>Zarejestruj się</u></string>
+
+    <!-- Przyciski -->
+
+    <string name="pomin">Pomiń</string>
+    <string name="zatwierdz">Zatwierdź</string>
+    <string name="anuluj">Anuluj</string>
+    <string name="uzyj_loka">Użyj lokalizacji</string>
+    <string name="wyloguj">Wyloguj się</string>
+
+    <!-- Input tekst -->
+    <string name="email">Email</string>
+    <string name="haslo">Hasło</string>
+    <string name="pow_haslo">Powtórz hasło</string>
+
+
+    <!-- Informacje -->
+    <string name="tekst_informacje">Podaj nam kilka informacji o sobie...</string>
+
+    <string name="zamieszkały">Zamieszkały/a</string>
+    <string name="niezamieszkały">Niezamieszkały/a</string>
+
+    <string name="jednorodzinna">Jednorodzinna</string>
+    <string name="wielorodzinna">Wielorodzinna</string>
+
+    <string name="segre">Segregujący</string>
+    <string name="nie_segre">Niesegregujący</string>
+
+    <string name="tekst_lokalizacja">Dodaj swoje miejsce zamieszkania</string>
+
+    <string name="gmina">Gmina</string>
+    <string name="miejscowosc">Miejscowość</string>
+    <string name="ulica">Ulica</string>
+
+    <string name="tekst_lokalizacja_potw">Potwierdź swój adres zamieszkania</string>
+
+    <string name="lub">lub</string>
+
+    <!-- Lokalizacja - potwierdź -->
+
+    <string name="gmina_input">lorem ipsum</string>
+    <string name="miejscowosc_input">lorem ipsum</string>
+    <string name="ulica_input">lorem ipsum</string>
+
+    <!-- Panel Użytkownika -->
+    <string name="user_name">User_name</string>
+    <string name="powiadomienia">Powiadomienia aplikacji</string>
+
+    <string name="ciemny_motyw">Ciemny motyw</string>
+
+    <string name="adres_edytuj">Edytuj adres zamieszkania</string>
+    <string name="zmien_haslo">Zmień hasło</string>
+
 
 </resources>

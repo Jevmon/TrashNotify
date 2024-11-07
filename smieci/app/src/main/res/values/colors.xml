@@ -13,12 +13,18 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="light_green_bg">#DEF2CF</color>
+    <color name="light_green">#DEECB2</color>
     <color name="dark_green_bg">#4D7B1F</color>
 
     <color name="gray_text">#3D413A</color>
     <color name="light_gray_text">#DEF2CF</color>
 
-    <color name="light_gray_input_text">#969696</color>
-    
+    <color name="light_gray_hint">#969696</color>
+
+    <color name="yellow_button">#F2B713</color>
+    <color name="bright_gray">#FAFAFA</color>
+
+    <color name="green_dark_button">#567A1F</color>
+    <color name="green_dark_button_pressed">#4B6F15</color>
+
 </resources>
