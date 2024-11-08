@@ -7,6 +7,7 @@ import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.smieci.databinding.DodawanieInformacjiBinding
@@ -18,6 +19,8 @@ class DodawanieInformacji : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DodawanieInformacjiBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        findViewById<ConstraintLayout>(R.id.EkranInformacji).minHeight= wysokoscEkranu
 
         //Obsługa wyborów
 
