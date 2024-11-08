@@ -96,6 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="ToggleButton"
+            android:checked="false"
             android:textOff="@string/zamieszkały"
             android:textOn="@string/zamieszkały"
             android:textColor="@color/gray_text"
@@ -104,7 +105,8 @@
             android:stateListAnimator="@null"
             android:layout_margin="3dp"
             android:layout_gravity="center"
-            android:background="@drawable/toggle_option_unchecked"/>
+            android:textColor="@drawable/toggle_button_text_color"
+            android:background="@drawable/toggle_button_background"/>
 
         <View
             android:id="@+id/line_1"
@@ -129,7 +131,9 @@
             android:stateListAnimator="@null"
             android:layout_margin="3dp"
             android:layout_gravity="center"
-            android:background="@drawable/toggle_option_unchecked"/>
+            android:checked="false"
+            android:textColor="@drawable/toggle_button_text_color"
+            android:background="@drawable/toggle_button_background"/>
 
     </LinearLayout>
 
@@ -157,7 +161,9 @@
             android:stateListAnimator="@null"
             android:layout_margin="3dp"
             android:layout_gravity="center"
-            android:background="@drawable/toggle_option_unchecked"/>
+            android:checked="false"
+            android:textColor="@drawable/toggle_button_text_color"
+            android:background="@drawable/toggle_button_background"/>
 
         <View
             android:id="@+id/line_2"
@@ -182,13 +188,14 @@
             android:text="ToggleButton"
             android:textOff="@string/wielorodzinna"
             android:textOn="@string/wielorodzinna"
-            android:textColor="@color/white"
+            android:textColor="@drawable/toggle_button_text_color"
             android:textSize="12sp"
             android:textFontWeight="500"
             android:stateListAnimator="@null"
             android:layout_margin="3dp"
             android:layout_gravity="center"
-            android:background="@drawable/toggle_option_checked"/>
+            android:checked="false"
+            android:background="@drawable/toggle_button_background"/>
 
 
     </LinearLayout>
@@ -216,7 +223,9 @@
             android:stateListAnimator="@null"
             android:layout_margin="3dp"
             android:layout_gravity="center"
-            android:background="@drawable/toggle_option_unchecked"/>
+            android:checked="false"
+            android:textColor="@drawable/toggle_button_text_color"
+            android:background="@drawable/toggle_button_background"/>
 
         <View
             android:id="@+id/line_3"
@@ -240,7 +249,9 @@
             android:stateListAnimator="@null"
             android:layout_margin="3dp"
             android:layout_gravity="center"
-            android:background="@drawable/toggle_option_unchecked"/>
+            android:checked="false"
+            android:textColor="@drawable/toggle_button_text_color"
+            android:background="@drawable/toggle_button_background"/>
 
 
     </LinearLayout>
