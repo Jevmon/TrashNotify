@@ -13,6 +13,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import android.location.Location
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 
 class DodawanieLokalizacji : AppCompatActivity() {
 
@@ -24,6 +25,8 @@ class DodawanieLokalizacji : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DodawanieLokalizacjiBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        findViewById<ConstraintLayout>(R.id.EkranLokalizacji).minHeight= wysokoscEkranu
 
         // Obsługa przycisku ZATWIERDŹ
         findViewById<Button>(R.id.buttonSubmit).setOnClickListener {

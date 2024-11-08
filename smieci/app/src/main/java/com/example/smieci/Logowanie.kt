@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.smieci.databinding.LogowanieBinding
@@ -19,6 +20,8 @@ class Logowanie : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = LogowanieBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        findViewById<ConstraintLayout>(R.id.EkranLogowania).minHeight= wysokoscEkranu
 
         //Obsługa przycisku POMIŃ
         findViewById<LinearLayout>(R.id.linearLayoutPomin).setOnClickListener{

@@ -3,6 +3,7 @@ package com.example.smieci
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.View
 import android.widget.CalendarView
 import android.widget.TextView
@@ -15,6 +16,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Calendar
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : ComponentActivity() {
 
@@ -25,6 +27,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         binding = MainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //Funkcja tworząca globalną zmienną
+        val displayMetrics  = resources.displayMetrics
+        val screenHeight = displayMetrics.heightPixels
+        pobierzWysokosc(screenHeight)
+
 
         val intent_logowanie = Intent(this, Logowanie::class.java)
         startActivity(intent_logowanie)
@@ -98,6 +106,11 @@ class MainActivity : ComponentActivity() {
 
 
     }
+}
 
+//Globalna zmienna przechowująca wysokość
+public var wysokoscEkranu : Int = 0
 
+fun pobierzWysokosc(wysokosc : Int){
+    wysokoscEkranu = (wysokosc - wysokosc*0.1).toInt()
 }
