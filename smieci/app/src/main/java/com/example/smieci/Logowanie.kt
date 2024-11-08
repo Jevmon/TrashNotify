@@ -30,7 +30,13 @@ class Logowanie : AppCompatActivity() {
         findViewById<Button>(R.id.button).setOnClickListener {
             val email = findViewById<EditText>(R.id.editTextEmail).text
             val password = findViewById<EditText>(R.id.editTextHaslo).text
-            //Toast.makeText(this, "${email} ${password}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "${email} ${password}", Toast.LENGTH_LONG).show()
+        }
+
+        //Obsługa przycisku Zarejestruj się
+        findViewById<TextView>(R.id.textOdnosnikRejestracja).setOnClickListener{
+            val intent_rejestracja = Intent(this, Rejestracja::class.java)
+            startActivity(intent_rejestracja)
         }
     }
 

@@ -91,8 +91,8 @@
         android:paddingStart="15dp"
         android:text="@string/gmina_input"
         android:textSize="16sp"
+        android:textColor="@color/gray_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -149,6 +149,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/pole_input"
         android:padding="12dp"
+        android:textColor="@color/gray_text"
         android:paddingStart="15dp"
         android:textSize="16sp"/>
 
@@ -165,6 +166,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/pole_input"
         android:padding="12dp"
+        android:textColor="@color/gray_text"
         android:paddingStart="15dp"
         android:textSize="16sp"/>
 
