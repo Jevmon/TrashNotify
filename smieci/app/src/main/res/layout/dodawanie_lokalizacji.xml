@@ -116,84 +116,114 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textGminaWybierz"
+
+
+    <LinearLayout
+        android:id="@+id/layoutGminaWybierz"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="350dp"
         android:background="@drawable/pole_input"
-        android:gravity="center"
-        android:padding="12dp"
-        android:text="@string/gmina"
-        android:textSize="16sp"
-        android:textColor="@color/gray_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        >
 
-    <TextView
-        android:id="@+id/textMiejscowoscWybierz"
+        <TextView
+            android:id="@+id/textGminaWybierz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="@string/gmina"
+            android:textColor="@color/gray_text"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="40dp"/>
+
+        <ImageView
+            android:id="@+id/imageStrzalka1"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/down" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutMiejscWybierz"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="425dp"
-        android:background="@drawable/pole_input"
-        android:gravity="center"
-        android:padding="12dp"
-        android:text="@string/miejscowosc"
-        android:textColor="@color/gray_text"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="425dp"
+        android:background="@drawable/pole_input"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/textMiejscowoscWybierz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="@string/miejscowosc"
+            android:textColor="@color/gray_text"
+            android:textSize="16sp"
+            android:layout_weight="1"
+            android:layout_marginStart="40dp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageStrzalka2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="20dp"
+            app:srcCompat="@drawable/down" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layoutUlicaWybierz"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="500dp"
+        android:background="@drawable/pole_input"
+        android:orientation="horizontal"
+        >
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="260dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="500dp"
-        android:background="@drawable/pole_input"
         android:gravity="center"
         android:padding="12dp"
         android:text="@string/ulica"
         android:textColor="@color/gray_text"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_weight="1"
+        android:layout_marginStart="40dp"
         app:layout_constraintTop_toTopOf="parent"
      />
-
-    <ImageView
-        android:id="@+id/imageStrzalka1"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="365dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/down" />
-
-    <ImageView
-        android:id="@+id/imageStrzalka2"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="440dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/down" />
 
     <ImageView
         android:id="@+id/imageStrzalka"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginTop="515dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_gravity="center"
+        android:layout_marginEnd="20dp"
         app:srcCompat="@drawable/down" />
+    </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
