@@ -67,6 +67,9 @@
     <string name="jednorodzinna">Jednorodzinna</string>
     <string name="wielorodzinna">Wielorodzinna</string>
 
+    <string name="Wysoka">Wysoka</string>
+    <string name="Pozostałe">Pozostałe</string>
+
     <string name="segre">Segregujący</string>
     <string name="nie_segre">Niesegregujący</string>
 
@@ -94,6 +97,11 @@
 
     <string name="adres_edytuj">Edytuj adres zamieszkania</string>
     <string name="zmien_haslo">Zmień hasło</string>
+
+    <!-- Edycja Informacji/Lokalizacji -->
+    <string name="informacje">Informacje</string>
+    <string name="lokalizacja">Lokalizacja</string>
+
 
 
 </resources>
