@@ -3,6 +3,7 @@ package com.example.smieci
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -12,8 +13,13 @@ import com.example.smieci.databinding.DodawanieLokalizacjiBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import android.location.Location
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.search.SearchBar
+import java.util.Locale
 
 class DodawanieLokalizacji : AppCompatActivity() {
 
@@ -44,6 +50,10 @@ class DodawanieLokalizacji : AppCompatActivity() {
                 getUserLocation()
             }
         }
+
+        //findViewById<TextView>(R.id.textGminaWybierz).setOnClickListener{
+        //
+        //}
     }
 
     private fun getUserLocation() {
@@ -51,7 +61,7 @@ class DodawanieLokalizacji : AppCompatActivity() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
                 if (location != null) {
-                    Toast.makeText(this, "Lokalizacja: ${location.latitude}, ${location.longitude}", Toast.LENGTH_LONG).show()
+                    convertLocationToAdress(location.latitude, location.longitude)
                 } else {
                     Toast.makeText(this, "Nie udało się uzyskać lokalizacji", Toast.LENGTH_LONG).show()
                 }
@@ -79,5 +89,30 @@ class DodawanieLokalizacji : AppCompatActivity() {
                 Toast.makeText(this, "Uprawnienia do lokalizacji nie zostały przyznane", Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    private fun convertLocationToAdress(latitude : Double, longitude: Double){
+        try{
+            val geocoder = Geocoder(this, Locale.getDefault())
+            val addresses = geocoder.getFromLocation(latitude, longitude, 1)
+            if(addresses != null && addresses.isNotEmpty()) {
+                val address = addresses[0]
+                val addressText = address.getAddressLine(0)
+                val wojewodztwo = address.adminArea
+                val numerDomu = address.featureName
+                val miasto = address.locality
+                val powiat = address.subAdminArea
+                val nwm = address.subLocality //Null gdy w Szczercowie
+                val ulica = address.thoroughfare
+                val kodPocztowy = address.postalCode
+                val kraj = address.countryName
+                Toast.makeText(this, "Lokalizacja: ${addressText}", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "Nie znaleziono adresu dla podanych współrzędnych", Toast.LENGTH_SHORT).show()
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "Błąd konwersji lokalizacji na adres: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+
     }
 }

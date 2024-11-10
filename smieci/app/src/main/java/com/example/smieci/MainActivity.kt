@@ -1,5 +1,6 @@
 package com.example.smieci
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -17,11 +18,26 @@ import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.getSystemService
+import android.content.pm.PackageManager
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 
 class MainActivity : ComponentActivity() {
 
     private lateinit var binding: MainBinding
     private lateinit var db: DatabaseHelper
+
+    private val channelId = "Kosze01"
+    private val channelName = "Przypomnienie_o_koszach"
+    private val notificationId = 101
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +48,12 @@ class MainActivity : ComponentActivity() {
         val displayMetrics  = resources.displayMetrics
         val screenHeight = displayMetrics.heightPixels
         pobierzWysokosc(screenHeight)
+
+        //Tworzenie kanału do powiadomień (żeby nie było kolizji pomiędzy powiadomieniami)
+        //createNotificationChannel()
+
+        //Wysyłanie powiadomienia
+        //sendNotification()
 
 
         val intent_logowanie = Intent(this, Logowanie::class.java)
@@ -103,9 +125,51 @@ class MainActivity : ComponentActivity() {
 
         }
 
-
-
     }
+
+    private fun requestNotificationPermission(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            if(ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS),0)
+            }
+        }
+    }
+
+    private fun createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(channelId, channelName, importance).apply {
+                description = "Kanał powiadomień dla aplikacji przykład"
+            }
+
+            val notificationManager: NotificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    private fun sendNotification(){
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // Jeśli brak uprawnień, poproś o ich nadanie
+            requestNotificationPermission()
+            return  // Przerwij, jeśli nie ma uprawnień
+        }
+        val intent = Intent(this, MainActivity::class.java)
+        val pendingIntent : PendingIntent = PendingIntent.getActivity(this, 0 ,intent, PendingIntent.FLAG_IMMUTABLE)
+
+        val builder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.notification)
+            .setContentTitle("Powiadomenie o koszach")
+            .setContentText("Jutro wywozy papierów \nNie zapomnij wystawić kosza! ;)")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+
+        with(NotificationManagerCompat.from(this)){
+            notify(notificationId, builder.build())
+        }
+    }
+
 }
 
 //Globalna zmienna przechowująca wysokość

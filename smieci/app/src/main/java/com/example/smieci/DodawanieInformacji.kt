@@ -1,15 +1,25 @@
 package com.example.smieci
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.print.PrintAttributes.Margins
+import android.view.Menu
+import android.view.View
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.background
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.marginTop
 import com.example.smieci.databinding.DodawanieInformacjiBinding
 import com.example.smieci.databinding.DodawanieLokalizacjiBinding
 
@@ -20,7 +30,49 @@ class DodawanieInformacji : AppCompatActivity() {
         binding = DodawanieInformacjiBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        findViewById<ConstraintLayout>(R.id.EkranInformacji).minHeight= wysokoscEkranu
+        var EkranInformacji = findViewById<ConstraintLayout>(R.id.EkranInformacji)
+        EkranInformacji.minHeight= wysokoscEkranu
+
+        //Tworzenie ToggleButton'ów Wysoka-Pozostałe
+
+        /*
+        var linearLayout = LinearLayout(this).apply {
+            id = View.generateViewId()
+            setBackgroundResource(R.drawable.vertical_line)
+            orientation = LinearLayout.VERTICAL
+            layoutParams = LinearLayout.LayoutParams(280.toPx(), 50.toPx()).apply {
+                topMargin = 330.toPx()
+            }
+        }
+
+        EkranInformacji.addView(linearLayout)
+
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(constraintSet)
+
+        constraintSet.connect(linearLayout.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END)
+        constraintSet.connect(linearLayout.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
+        constraintSet.connect(linearLayout.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START)
+
+        constraintSet.applyTo(EkranInformacji)
+
+        val wysoka = ToggleButton(this).apply {
+            id = View.generateViewId()
+            text = "Wysoka"
+            textOn = "Wysoka"
+            textOff = "Wysoka"
+            layoutParams = LinearLayout.LayoutParams(110.toPx(), LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+            isChecked = false
+            textSize = 12f
+        }
+
+        val view = View(this).apply {
+            id= View.generateViewId()
+        }
+
+        linearLayout.addView(wysoka)
+
+        */
 
         //Obsługa wyborów
 
@@ -86,4 +138,5 @@ class DodawanieInformacji : AppCompatActivity() {
             startActivity(intent_lokalizacja)
         }
     }
+    fun Int.toPx(): Int = (this * resources.displayMetrics.density).toInt()
 }
