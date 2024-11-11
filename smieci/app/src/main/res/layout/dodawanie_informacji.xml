@@ -15,6 +15,11 @@
         android:background="@color/light_green"
         >
 
+
+        <!--
+
+        Podląd Wysoka / Pozostałe
+
         <LinearLayout
             android:layout_width="280dp"
             android:layout_height="45dp"
@@ -24,6 +29,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
 
             <ToggleButton
                 android:id="@+id/toggleOp3_1"
@@ -67,6 +73,8 @@
 
 
         </LinearLayout>
+
+        -->
 
         <ImageView
             android:id="@+id/imageWave1"
@@ -142,6 +150,7 @@
 
 
         <LinearLayout
+            android:id="@+id/Zamieszkanie"
             android:layout_width="280dp"
             android:layout_height="45dp"
             android:layout_marginTop="330dp"
@@ -196,7 +205,9 @@
 
         </LinearLayout>
 
+        <!-- Podląd na wybór typu rodziny
         <LinearLayout
+            android:id="@+id/Rodzina"
             android:layout_width="280dp"
             android:layout_height="45dp"
             android:layout_marginTop="400dp"
@@ -232,12 +243,15 @@
                 android:layout_marginBottom="3dp"
                 />
 
+             -->
+
             <!-- Przykładowy przycisk - naciścięty:
             bg_color = yellow
             fontcolor = white
             fontweight = 500
             -->
 
+        <!--
             <ToggleButton
                 android:id="@+id/toggleOp2_2"
                 android:layout_width="110dp"
@@ -257,11 +271,13 @@
 
 
         </LinearLayout>
+        -->
 
         <LinearLayout
+            android:id="@+id/Segregacja"
             android:layout_width="280dp"
             android:layout_height="45dp"
-            android:layout_marginTop="540dp"
+            android:layout_marginTop="400dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -311,7 +327,6 @@
 
 
         </LinearLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
