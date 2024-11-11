@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/EkranInformacji"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_green"
+        >
+
+        <EditText
+            android:id="@+id/editTextStareHaslo"
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="380dp"
+            android:background="@drawable/pole_input"
+            android:elevation="2dp"
+            android:ems="10"
+            android:hint="@string/haslo"
+            android:inputType="textPassword"
+            android:paddingLeft="15dp"
+            android:textColor="@color/gray_text"
+            android:textColorHint="@color/light_gray_hint"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextNoweHaslo"
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="450dp"
+            android:background="@drawable/pole_input"
+            android:elevation="2dp"
+            android:ems="10"
+            android:hint="@string/nowe_haslo"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="15dp"
+            android:textColor="@color/gray_text"
+            android:textColorHint="@color/light_gray_hint"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextNoweHasloPow"
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="520dp"
+            android:background="@drawable/pole_input"
+            android:elevation="2dp"
+            android:ems="10"
+            android:hint="@string/pow_haslo"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="15dp"
+            android:textColor="@color/gray_text"
+            android:textColorHint="@color/light_gray_hint"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageWave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-125dp"
+            android:alpha=".6"
+            android:src="@drawable/shape1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/shape1" />
+
+        <TextView
+            android:id="@+id/textZmianaHasla"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300dp"
+            android:text="@string/zmiana_hasla"
+            android:textColor="@color/gray_text"
+            android:textFontWeight="500"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/userIcon2"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="140dp"
+            android:src="@drawable/user_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/user_icon" />
+
+        <ImageView
+            android:id="@+id/imageWave1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="-125dp"
+            android:alpha=".6"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/shape1"
+            app:srcCompat="@drawable/shape1" />
+
+        <ImageView
+            android:id="@+id/imageWave2"
+            android:layout_width="wrap_content"
+            android:layout_height="500dp"
+            android:layout_marginBottom="-160dp"
+            android:alpha=".6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/shape2"
+            app:srcCompat="@drawable/shape2" />
+
+        <ImageView
+            android:id="@+id/imageWave3"
+            android:layout_width="414dp"
+            android:layout_height="560dp"
+            android:layout_marginBottom="-190dp"
+            android:alpha=".5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/shape3"
+            app:srcCompat="@drawable/shape3" />
+
+        <Button
+            android:id="@+id/buttonAnuluj2"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:background="@drawable/przycisk_anuluj"
+            android:text="@string/anuluj"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.78" />
+
+        <Button
+            android:id="@+id/buttonSubmit2"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:background="@drawable/przycisk_zatwierdz"
+            android:text="@string/zatwierdz"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.7" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

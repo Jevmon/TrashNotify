@@ -28,9 +28,15 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import android.content.pm.PackageManager
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.ActionBarDrawerToggle
+import android.graphics.drawable.Drawable
 
-class MainActivity : ComponentActivity() {
+
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: MainBinding
     private lateinit var db: DatabaseHelper
@@ -38,6 +44,10 @@ class MainActivity : ComponentActivity() {
     private val channelId = "Kosze01"
     private val channelName = "Przypomnienie_o_koszach"
     private val notificationId = 101
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
+    private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,9 +66,28 @@ class MainActivity : ComponentActivity() {
         //sendNotification()
 
 
-        val intent_logowanie = Intent(this, Logowanie::class.java)
-        startActivity(intent_logowanie)
+        //val intent_logowanie = Intent(this, Logowanie::class.java)
+        //startActivity(intent_logowanie)
 
+        //tworzenie powiazania z menu
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navigationView = findViewById(R.id.nav_view)
+        toolbar = findViewById(R.id.toolbar)
+
+        setSupportActionBar(binding.toolbar)
+
+        val toggle = ActionBarDrawerToggle(
+            this, // activity
+            drawerLayout,
+            toolbar,
+            R.string.open,
+            R.string.close
+        )
+
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        toolbar.setNavigationIcon(R.drawable.user_icon_vector)
 
         //Ogólne funkcje i dane
 
