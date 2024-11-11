@@ -22,6 +22,7 @@ import android.os.Build
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.Context
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -29,6 +30,7 @@ import androidx.core.content.getSystemService
 import android.content.pm.PackageManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+
 
 class MainActivity : ComponentActivity() {
 
@@ -56,7 +58,7 @@ class MainActivity : ComponentActivity() {
         //sendNotification()
 
 
-        val intent_logowanie = Intent(this, Logowanie::class.java)
+        val intent_logowanie = Intent(this, UserPanel::class.java)
         startActivity(intent_logowanie)
 
 
@@ -127,14 +129,6 @@ class MainActivity : ComponentActivity() {
 
     }
 
-    private fun requestNotificationPermission(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
-            if(ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED){
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS),0)
-            }
-        }
-    }
-
     private fun createNotificationChannel(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val importance = NotificationManager.IMPORTANCE_DEFAULT
@@ -151,7 +145,7 @@ class MainActivity : ComponentActivity() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
             // Jeśli brak uprawnień, poproś o ich nadanie
-            requestNotificationPermission()
+            requestNotificationPermission(this)
             return  // Przerwij, jeśli nie ma uprawnień
         }
         val intent = Intent(this, MainActivity::class.java)
@@ -170,6 +164,14 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+}
+
+public fun requestNotificationPermission(context : Context){
+    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+        if(ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(context as Activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS),0)
+        }
+    }
 }
 
 //Globalna zmienna przechowująca wysokość
