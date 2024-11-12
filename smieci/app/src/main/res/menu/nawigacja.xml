@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.androidex1.MainActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ShowIn="nagivation_view"
     >
     <group android:checkableBehavior="single" >
         <item

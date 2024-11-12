@@ -39,6 +39,11 @@ class UserPanel : AppCompatActivity() {
 
         val zapisaneDane = ObslugaPrzechowywaniaDanych(this)
 
+        //Obsługa cofnięcia
+        findViewById<ImageView>(R.id.cofnij).setOnClickListener {
+            finish()
+        }
+
         //tworzenie obiektów potrzebnych do zmiany nazwy urzytkownika
 
         val textViewZmiana = findViewById<TextView>(R.id.NazwaUzytkownika)
@@ -175,10 +180,9 @@ class UserPanel : AppCompatActivity() {
         }
 
         //Obsługa przycisku edytuj adres zamieszkania
-        //ZMIENIĆ DOCELOWĄ STRONĘ NA EDYTCJE LOKALIZACJI (USUNĄĆ PO ZROBIENIU)
         findViewById<LinearLayout>(R.id.EdytujAdresZamieszakniaLayout).setOnClickListener {
-            var intent_lokalizacja = Intent(this, DodawanieLokalizacji::class.java)
-            startActivity(intent_lokalizacja)
+            var intent_edytowanie_lokalizacji = Intent(this, EdytowanieLokalizacji::class.java)
+            startActivity(intent_edytowanie_lokalizacji)
         }
 
         //Obsługa przycisku Zmień hasło

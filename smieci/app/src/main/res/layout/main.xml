@@ -7,19 +7,11 @@
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
     tools:context=".MainActivity"
+    tools:openDrawer="start"
+    android:fitsSystemWindows="true"
     >
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header"
-        app:menu="@menu/nawigacja"
-        app:itemIconTint="@color/dark_gray"
-        app:itemTextColor="@color/dark_green_bg">
-    </com.google.android.material.navigation.NavigationView>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -208,4 +200,17 @@
 
     </LinearLayout>
     </ScrollView>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nawigacja"
+        app:itemIconTint="@color/dark_gray"
+        app:itemTextColor="@color/dark_green_bg">
+    </com.google.android.material.navigation.NavigationView>
+
 </androidx.drawerlayout.widget.DrawerLayout>

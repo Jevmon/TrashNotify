@@ -35,6 +35,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import android.graphics.drawable.Drawable
+import android.view.MenuItem
 
 
 class MainActivity : AppCompatActivity() {
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var toolbar: Toolbar
+    lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,8 +69,9 @@ class MainActivity : AppCompatActivity() {
         //sendNotification()
 
 
-        val intent_logowanie = Intent(this, UserPanel::class.java)
-        startActivity(intent_logowanie)
+        //val intent_logowanie = Intent(this, UserPanel::class.java)
+        //startActivity(intent_logowanie)
+        val intent_userpanel = Intent(this, UserPanel::class.java)
 
         //tworzenie powiazania z menu
         drawerLayout = findViewById(R.id.drawer_layout)
@@ -77,7 +80,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        val toggle = ActionBarDrawerToggle(
+        toggle = ActionBarDrawerToggle(
             this, // activity
             drawerLayout,
             toolbar,
@@ -89,6 +92,19 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
 
         toolbar.setNavigationIcon(R.drawable.user_icon_vector)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        navigationView.setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.nav_home -> drawerLayout.closeDrawers()
+                R.id.nav_settings -> startActivity(intent_userpanel)
+                R.id.nav_about -> Toast.makeText(applicationContext, "ab", Toast.LENGTH_SHORT).show()
+                //wylogowywanie
+                R.id.nav_logout -> Toast.makeText(applicationContext, "logout", Toast.LENGTH_SHORT).show()
+                }
+            true
+        }
+
 
         //Ogólne funkcje i dane
 
@@ -157,6 +173,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+    //wybieranie opcji - nawigacja
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(toggle.onOptionsItemSelected(item)){
+            return true
+        }
+        return false
+    }
+
     private fun createNotificationChannel(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val importance = NotificationManager.IMPORTANCE_DEFAULT
@@ -208,3 +233,4 @@ public var wysokoscEkranu : Int = 0
 fun pobierzWysokosc(wysokosc : Int){
     wysokoscEkranu = (wysokosc - wysokosc*0.1).toInt()
 }
+

@@ -17,9 +17,13 @@
         android:theme="@style/Theme.Smieci"
         tools:targetApi="31">
         <activity
-            android:name=".ZmienHaslo"
+            android:name=".EdytowanieLokalizacji"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity
+            android:name=".ZmienHaslo"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".UserPanel"
             android:exported="false"

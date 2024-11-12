@@ -17,6 +17,16 @@
     >
 
     <ImageView
+        android:id="@+id/cofnij"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/left_arrow_black" />
+
+    <ImageView
         android:id="@+id/imageWave1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
