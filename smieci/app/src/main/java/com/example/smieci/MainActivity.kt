@@ -67,8 +67,8 @@ class MainActivity : AppCompatActivity() {
         //sendNotification()
 
 
-        //val intent_logowanie = Intent(this, Logowanie::class.java)
-        //startActivity(intent_logowanie)
+        val intent_logowanie = Intent(this, UserPanel::class.java)
+        startActivity(intent_logowanie)
 
         //tworzenie powiazania z menu
         drawerLayout = findViewById(R.id.drawer_layout)
