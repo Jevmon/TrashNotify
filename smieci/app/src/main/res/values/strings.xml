@@ -106,6 +106,16 @@
     <string name="aktualne_haslo">Aktualne hasło</string>
     <string name="nowe_haslo">Nowe hasło</string>
     <string name="powtorz_nowe_haslo">Powtórz nowe hasło</string>
+    <string name="zmiana_hasla">Zmień swoje hasło </string>
+
+    <!-- Nawigacja boczna -->
+    <string name="strona_glowna">Strona główna</string>
+    <string name="ustawienia">Ustawienia</string>
+    <string name="o_nas">O nas</string>
+    <string name="user_email">sample@email.com</string>
+
+    <string name="open">Otwórz</string>
+    <string name="close">Zamknij</string>
 
 
 </resources>

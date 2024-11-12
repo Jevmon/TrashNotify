@@ -27,4 +27,6 @@
     <color name="green_dark_button">#567A1F</color>
     <color name="green_dark_button_pressed">#4B6F15</color>
 
+    <color name="dark_gray">#3D413A</color>
+
 </resources>

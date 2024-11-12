@@ -26,7 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.863" />
+            app:layout_constraintVertical_bias="0.86" />
 
         <Button
             android:id="@+id/buttonSubmit"
@@ -45,7 +45,7 @@
         <LinearLayout
             android:layout_width="280dp"
             android:layout_height="45dp"
-            android:layout_marginTop="596dp"
+            android:layout_marginTop="590dp"
             android:background="@drawable/toggle_options_bg"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +98,7 @@
         <LinearLayout
             android:layout_width="280dp"
             android:layout_height="45dp"
-            android:layout_marginTop="456dp"
+            android:layout_marginTop="450dp"
             android:background="@drawable/toggle_options_bg"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -151,7 +151,7 @@
         <LinearLayout
             android:layout_width="280dp"
             android:layout_height="45dp"
-            android:layout_marginTop="384dp"
+            android:layout_marginTop="380dp"
             android:background="@drawable/toggle_options_bg"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -203,7 +203,7 @@
         <LinearLayout
             android:layout_width="280dp"
             android:layout_height="45dp"
-            android:layout_marginTop="528dp"
+            android:layout_marginTop="520dp"
             android:background="@drawable/toggle_options_bg"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"

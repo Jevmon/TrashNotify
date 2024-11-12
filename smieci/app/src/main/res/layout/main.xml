@@ -1,26 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:id="@+id/drawer_layout"
+    tools:context=".MainActivity"
+    >
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nawigacja"
+        app:itemIconTint="@color/dark_gray"
+        app:itemTextColor="@color/dark_green_bg">
+    </com.google.android.material.navigation.NavigationView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:navigationIcon="@drawable/user_icon_vector"
+
+            >
+
+        </androidx.appcompat.widget.Toolbar>
+
+
         <androidx.appcompat.widget.ActionMenuView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
-
-
-
         </androidx.appcompat.widget.ActionMenuView>
+
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/Baner"
@@ -173,5 +205,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</androidx.drawerlayout.widget.DrawerLayout>

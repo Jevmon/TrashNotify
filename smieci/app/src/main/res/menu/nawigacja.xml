@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.androidex1.MainActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <group android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/padlock"
+            android:title="@string/strona_glowna" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/padlock"
+            android:title="@string/ustawienia"/>
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/padlock"
+            android:title="@string/o_nas"/>
+    </group>
+    <item
+        android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/padlock"
+                android:title="Logout"/>
+        </menu>
+    </item>
+</menu>
