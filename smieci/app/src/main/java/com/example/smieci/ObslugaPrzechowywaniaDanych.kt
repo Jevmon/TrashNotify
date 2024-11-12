@@ -7,14 +7,35 @@ class ObslugaPrzechowywaniaDanych(private val context: Context) {
     private val sharedPreferences = context.getSharedPreferences("SmieciDane", Context.MODE_PRIVATE)
 
 
-    //Powiadomienia
+    //Liczba powiadomień
+
+    var iloscPowiadomien = iloscPowiadomien()
+
+    fun dodajPowiadomienie(){
+        iloscPowiadomien++
+        val editor = sharedPreferences.edit()
+        editor.putInt("IloscPowiadomien", iloscPowiadomien)
+        editor.apply()
+    }
+
+    fun zresetujPowiadomienia(){
+        val editor = sharedPreferences.edit()
+        editor.putInt("IloscPowiadomien", 0)
+        editor.apply()
+    }
+
+    fun iloscPowiadomien() : Int{
+        return sharedPreferences.getInt("IloscPowiadomien", 0)
+    }
+
+    //Powiadomienia true - włączone, false - wyłączone
     fun zapiszPowiadomienia(ustawenie:Boolean){
         val editor = sharedPreferences.edit()
         editor.putBoolean("Powiadomienia", ustawenie)
         editor.apply()
     }
     fun ustawieniePowiadomienia(): Boolean{
-        return sharedPreferences.getBoolean("Powiadomienia", false)
+        return sharedPreferences.getBoolean("Powiadomienia", true)
     }
 
     //Motyw

@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Im
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
@@ -49,6 +50,8 @@ class UserPanel : AppCompatActivity() {
         val textViewZmiana = findViewById<TextView>(R.id.NazwaUzytkownika)
         textViewZmiana.text = zapisaneDane.nazwaUzytkownika()
         val imageViewZmiana = findViewById<ImageView>(R.id.obrazZmianyNazwy)
+        val ustawieniaLayout = findViewById<LinearLayout>(R.id.ustawienia)
+        val ustawieniaParams = ustawieniaLayout.layoutParams as ConstraintLayout.LayoutParams
 
         val text = textViewZmiana.text
         val layoutNazwy = findViewById<LinearLayout>(R.id.ZmianaNazwy)
@@ -87,8 +90,8 @@ class UserPanel : AppCompatActivity() {
             setBackgroundResource(R.color.gray)
             setTextColor(ContextCompat.getColor(context, R.color.light_gray_text))
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
-                topMargin = 5.toPx()
-                bottomMargin = 5.toPx()
+                topMargin = 10.toPx()
+                bottomMargin = 10.toPx()
             }
         }
 
@@ -98,8 +101,8 @@ class UserPanel : AppCompatActivity() {
             setBackgroundResource(R.color.green_dark_button)
             setTextColor(ContextCompat.getColor(context, R.color.light_gray_text))
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
-                topMargin = 5.toPx()
-                bottomMargin = 5.toPx()
+                topMargin = 10.toPx()
+                bottomMargin = 10.toPx()
             }
         }
 
@@ -116,6 +119,8 @@ class UserPanel : AppCompatActivity() {
                 layoutNazwy.addView(editText)
                 linearLayoutGuziki.addView(anuluj)
                 linearLayoutGuziki.addView(zatwierdz)
+                ustawieniaParams.topMargin = 310.toPx()
+                ustawieniaLayout.layoutParams = ustawieniaParams
                 kliknieto = true
             }
         }
@@ -126,6 +131,8 @@ class UserPanel : AppCompatActivity() {
             layoutNazwy.removeView(editText)
             linearLayoutGuziki.removeView(anuluj)
             linearLayoutGuziki.removeView(zatwierdz)
+            ustawieniaParams.topMargin = 300.toPx()
+            ustawieniaLayout.layoutParams = ustawieniaParams
             kliknieto = false
         }
 
@@ -133,12 +140,13 @@ class UserPanel : AppCompatActivity() {
         zatwierdz.setOnClickListener {
             textViewZmiana.setText(editText.text)
             zapisaneDane.zapiszNazweUzytkownika(editText.text.toString())
-
             textViewZmiana.visibility = View.VISIBLE
             imageViewZmiana.visibility = View.VISIBLE
             layoutNazwy.removeView(editText)
             linearLayoutGuziki.removeView(anuluj)
             linearLayoutGuziki.removeView(zatwierdz)
+            ustawieniaParams.topMargin = 300.toPx()
+            ustawieniaLayout.layoutParams = ustawieniaParams
             kliknieto = false
         }
 
