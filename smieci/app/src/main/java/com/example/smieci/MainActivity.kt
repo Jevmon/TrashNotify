@@ -2,6 +2,8 @@ package com.example.smieci
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlarmManager
+import android.app.Notification
 import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -35,6 +37,10 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.os.Message
+import android.provider.Settings
+import androidx.appcompat.app.AlertDialog
 
 
 class MainActivity : AppCompatActivity() {
@@ -43,12 +49,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var db: DatabaseHelper
 
     private val channelId = "Kosze01"
-    private val channelName = "Przypomnienie_o_koszach"
-    private val notificationId = 101
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var toolbar: Toolbar
+
+    private var iloscPowi : Int = 0;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,16 +66,26 @@ class MainActivity : AppCompatActivity() {
         val screenHeight = displayMetrics.heightPixels
         pobierzWysokosc(screenHeight)
 
-        //Tworzenie kanału do powiadomień (żeby nie było kolizji pomiędzy powiadomieniami)
-        //createNotificationChannel()
-
-        //Wysyłanie powiadomienia
-        //sendNotification()
+        val zapisaneDane = ObslugaPrzechowywaniaDanych(this)
+        iloscPowi = zapisaneDane.iloscPowiadomien()
 
 
-        val intent_logowanie = Intent(this, UserPanel::class.java)
-        startActivity(intent_logowanie)
+        //Obsługa powiadomień
 
+        if(zapisaneDane.ustawieniePowiadomienia()){
+
+            createNotificationChannel()
+
+            requestNotificationPermission(this)
+
+            powiadomienie()
+            zapisaneDane.dodajPowiadomienie()
+
+        } else {
+            val notificationManager = NotificationManagerCompat.from(this)
+            notificationManager.cancelAll()
+            zapisaneDane.zresetujPowiadomienia()
+        }
         //tworzenie powiazania z menu
         drawerLayout = findViewById(R.id.drawer_layout)
         navigationView = findViewById(R.id.nav_view)
@@ -130,6 +146,7 @@ class MainActivity : AppCompatActivity() {
         // Termin Najbliższego wywozu i jego typ
 
         val TerminWywozu = findViewById<TextView>(R.id.termin_najblizszego_wywozu)
+        //TerminWywozu.setText(zapisaneDane.iloscPowiadomien().toString())
         TerminWywozu.setText(najblizsza.toString())
 
         val TloWywozu = findViewById<AppCompatImageView>(R.id.Tlo_kosz)
@@ -157,38 +174,62 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun createNotificationChannel(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(channelId, channelName, importance).apply {
-                description = "Kanał powiadomień dla aplikacji przykład"
-            }
+    private fun powiadomienie() {
+        checkExactAlarmPermission()
+        val intent = Intent(applicationContext, Powiadomienia::class.java)
+        // tytuł i tekst powiadomienia
+        val title = "E żydzie!"
+        val message = "Czas na piec ;D"
+        intent.putExtra(titleExtra, title)
+        intent.putExtra(messageExtra, message)
+        val pendingIntent = PendingIntent.getBroadcast(
+            applicationContext,
+            iloscPowi,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
 
-            val notificationManager: NotificationManager = getSystemService(NotificationManager::class.java)
-            notificationManager.createNotificationChannel(channel)
-        }
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val time = getTime()
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            time,
+            pendingIntent
+        )
     }
 
-    private fun sendNotification(){
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            // Jeśli brak uprawnień, poproś o ich nadanie
-            requestNotificationPermission(this)
-            return  // Przerwij, jeśli nie ma uprawnień
-        }
-        val intent = Intent(this, MainActivity::class.java)
-        val pendingIntent : PendingIntent = PendingIntent.getActivity(this, 0 ,intent, PendingIntent.FLAG_IMMUTABLE)
+    private fun getTime(): Long{
+        //ustawienie kiedy powiadomienie
+        val minute = 0
+        val hour = 9
+        val day = 13
+        val month = 11
+        val year = 2024
 
-        val builder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.notification)
-            .setContentTitle("Powiadomenie o koszach")
-            .setContentText("Jutro wywozy papierów \nNie zapomnij wystawić kosza! ;)")
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
+        val calendar = Calendar.getInstance()
+        calendar.set(year, month - 1, day, hour, minute)
+        return calendar.timeInMillis
+    }
 
-        with(NotificationManagerCompat.from(this)){
-            notify(notificationId, builder.build())
+    private fun createNotificationChannel() {
+        val name = "KanlendarzKosze"
+        val desc = "Powiadomienia o wystawianiu koszy"
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val channel = NotificationChannel(channelId, name, importance)
+        channel.description = desc
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
+    }
+
+
+
+    private fun checkExactAlarmPermission(){
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !alarmManager.canScheduleExactAlarms()){
+            Toast.makeText(this, "Proszę włączyć dokładne alarmy dla tej apliakcji", Toast.LENGTH_SHORT).show()
+            val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM, Uri.parse("package:$packageName"))
+            startActivity(intent)
         }
     }
 
