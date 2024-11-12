@@ -36,4 +36,15 @@ class ObslugaPrzechowywaniaDanych(private val context: Context) {
     fun nazwaUzytkownika() : String?{
         return sharedPreferences.getString("NazwaUzytkownika", "Uzytkownik")
     }
+
+    //Haslo - USUNĄĆ PRZY ZMIANIE NA BAZE DANYCH
+    fun zapiszHaslo(haslo: String){
+        val editor = sharedPreferences.edit()
+        editor.putString("Haslo", haslo)
+        editor.apply()
+    }
+
+    fun Haslo(): String?{
+        return sharedPreferences.getString("Haslo", "x")
+    }
 }

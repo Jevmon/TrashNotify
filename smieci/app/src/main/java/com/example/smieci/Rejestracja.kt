@@ -6,6 +6,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.smieci.databinding.RejestracjaBinding
@@ -16,6 +17,9 @@ class Rejestracja : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = RejestracjaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        var ekranRejestracji = findViewById<ConstraintLayout>(R.id.EkranRejestracji)
+        ekranRejestracji.minHeight= wysokoscEkranu
 
         //Obsługa przycisku POMIŃ
         findViewById<LinearLayout>(R.id.linearLayoutPomin).setOnClickListener{

@@ -27,7 +27,7 @@
             app:srcCompat="@drawable/user_icon" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/cofnij"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
@@ -144,7 +144,7 @@
                 android:layout_weight="1"
                 android:text="@string/ciemny_motyw"
                 android:layout_gravity="center"
-                android:textColor="@color/black"
+                android:textColor="@color/gray_text"
                 android:textSize="18sp"
                 android:textFontWeight="500"
                 android:layout_marginEnd="15dp"

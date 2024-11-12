@@ -102,6 +102,10 @@
     <string name="informacje">Informacje</string>
     <string name="lokalizacja">Lokalizacja</string>
 
+    <!-- Zmiana Hasla -->
+    <string name="aktualne_haslo">Aktualne hasło</string>
+    <string name="nowe_haslo">Nowe hasło</string>
+    <string name="powtorz_nowe_haslo">Powtórz nowe hasło</string>
 
 
 </resources>

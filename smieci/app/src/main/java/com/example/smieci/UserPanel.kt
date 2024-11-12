@@ -182,10 +182,9 @@ class UserPanel : AppCompatActivity() {
         }
 
         //Obsługa przycisku Zmień hasło
-        //TO SAMO CO WYŻEJ TYLKO ZAMIAST LOKAZLIZACJA TO NA HASŁO (USUNĄĆ PO ZROBIENIU)
         findViewById<LinearLayout>(R.id.ZmienHasloLayout).setOnClickListener {
-            //var intent_haslo = Intent(this, xxx::class.java)
-            //startActivity(intent_haslo)
+            var intent_haslo = Intent(this, ZmienHaslo::class.java)
+            startActivity(intent_haslo)
         }
     }
 
