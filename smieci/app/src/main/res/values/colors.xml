@@ -29,4 +29,6 @@
 
     <color name="dark_gray">#3D413A</color>
 
+    <!-- Kolory do bloczków -->
+    <color name="papier_border">#81C3FA</color>
 </resources>

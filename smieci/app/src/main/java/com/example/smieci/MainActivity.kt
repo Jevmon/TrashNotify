@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        toolbar.setNavigationIcon(R.drawable.user_icon_vector)
+       // toolbar.setNavigationIcon(R.drawable.user_icon_vector)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         navigationView.setNavigationItemSelectedListener {
@@ -161,7 +161,8 @@ class MainActivity : AppCompatActivity() {
 
 
         // Termin Najbliższego wywozu i jego typ
-
+        //POPRAWIC TO TRZEBA
+        /*
         val TerminWywozu = findViewById<TextView>(R.id.termin_najblizszego_wywozu)
         //TerminWywozu.setText(zapisaneDane.iloscPowiadomien().toString())
         TerminWywozu.setText(najblizsza.toString())
@@ -188,6 +189,8 @@ class MainActivity : AppCompatActivity() {
             tekstWybranaData.setText(WybranaData)
 
         }
+
+         */
 
     }
 
