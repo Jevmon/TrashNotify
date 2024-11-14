@@ -42,7 +42,8 @@ class UserPanel : AppCompatActivity() {
 
         //Obsługa cofnięcia
         findViewById<ImageView>(R.id.cofnij).setOnClickListener {
-            finish()
+            var intent_main = Intent(this, MainActivity::class.java)
+            startActivity(intent_main)
         }
 
         //tworzenie obiektów potrzebnych do zmiany nazwy urzytkownika

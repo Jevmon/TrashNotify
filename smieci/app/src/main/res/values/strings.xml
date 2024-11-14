@@ -32,12 +32,11 @@
     </string>
 
 
-
-
     <!-- Rejestracja -->
     <string name="zarejestruj">Zarejetruj się</string>
     <string name="konto">Masz już konto?</string>
     <string name="konto_zaloguj"><u>Zaloguj się</u></string>
+    <string name="nazwa_uzytkownika">Nazwa użytkownika</string>
 
     <!-- Logowanie -->
     <string name="zaloguj">Zaloguj się</string>

@@ -198,7 +198,7 @@
                 android:stateListAnimator="@null"
                 android:textOn="@string/informacje"
                 android:textOff="@string/informacje"
-                android:checked="false"
+                android:checked="true"
                 android:textSize="16sp"
                 android:layout_weight="1"
                 android:textColor="@drawable/toggle_button_text_color"
@@ -212,7 +212,7 @@
                 android:textOff="@string/lokalizacja"
                 android:background="@drawable/toggle_option_lokalizacja"
                 android:stateListAnimator="@null"
-                android:checked="true"
+                android:checked="false"
                 android:textSize="16sp"
                 android:textColor="@drawable/toggle_button_text_color"
                 android:layout_weight="1"/>
