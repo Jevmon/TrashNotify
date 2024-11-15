@@ -142,7 +142,7 @@
         android:id="@+id/userIcon"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:src="@drawable/user_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -153,7 +153,7 @@
         android:id="@+id/textDodaj"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="230dp"
         android:text="@string/tekst_lokalizacja"
         android:textColor="@color/gray_text"
         android:textFontWeight="500"
@@ -163,25 +163,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textLub"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="635dp"
-        android:text="@string/lub"
-        android:textColor="@color/gray_text"
-        android:textFontWeight="500"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/buttonSubmit"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginTop="580dp"
+        android:layout_marginTop="660dp"
         android:background="@drawable/przycisk_zatwierdz"
         android:text="@string/zatwierdz"
         android:textColor="@color/white"
@@ -195,7 +181,7 @@
         android:id="@+id/buttonUzyjLokalizacji"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginTop="660dp"
+        android:layout_marginTop="580dp"
         android:background="@drawable/przycisk_zatwierdz"
         android:text="@string/uzyj_loka"
         android:textColor="@color/white"
@@ -206,7 +192,135 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <EditText
+        android:id="@+id/editText_Gmina"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="310dp"
+        android:background="@drawable/pole_input"
+        android:ems="10"
+        android:inputType="text"
+        android:padding="12dp"
+        android:paddingStart="15dp"
+        android:hint="@string/gmina"
+        android:textColorHint="@color/light_gray_hint"
+        android:textSize="16sp"
+        android:textColor="@color/gray_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textGmina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:text="@string/gmina"
+        android:textColor="@color/gray_text"
+        android:textFontWeight="500"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/textMiejscowosc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="370dp"
+        android:text="@string/miejscowosc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="18sp"
+        android:textColor="@color/gray_text"
+        android:textFontWeight="500"/>
+
+    <TextView
+        android:id="@+id/textUlica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="460dp"
+        android:text="@string/ulica"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="18sp"
+        android:textColor="@color/gray_text"
+        android:textFontWeight="500"/>
+
+    <EditText
+        android:id="@+id/editTextMiejscowosc"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/miejscowosc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/pole_input"
+        android:padding="12dp"
+        android:textColor="@color/gray_text"
+        android:paddingStart="15dp"
+        android:textSize="16sp"
+        android:textColorHint="@color/light_gray_hint"/>
+
+    <EditText
+        android:id="@+id/editTextUlica"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="490dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/ulica"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/pole_input"
+        android:padding="12dp"
+        android:textColor="@color/gray_text"
+        android:paddingStart="15dp"
+        android:textSize="16sp"
+        android:textColorHint="@color/light_gray_hint"/>
+
+    <ImageView
+        android:id="@+id/imageEdit3"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="500dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/edit_text_icon" />
+
+    <ImageView
+        android:id="@+id/imageEdit1"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="320dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/edit_text_icon" />
+
+    <ImageView
+        android:id="@+id/imageEdit2"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="410dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/edit_text_icon" />
+
+    <!--
     <LinearLayout
         android:id="@+id/layoutGminaWybierz"
         android:layout_width="260dp"
@@ -315,6 +429,7 @@
         android:layout_marginEnd="20dp"
         app:srcCompat="@drawable/down" />
     </LinearLayout>
+    -->
 
 
 

@@ -40,17 +40,23 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Message
 import android.provider.Settings
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import android.view.MenuItem
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.graphics.toColor
+import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.time.Month
+import java.util.Locale
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: MainBinding
-    private lateinit var db: DatabaseHelper
+
 
     private val channelId = "Kosze01"
 
@@ -61,14 +67,15 @@ class MainActivity : AppCompatActivity() {
 
     private var iloscPowi : Int = 0;
 
+    private var termin : String = ""
+    private var rodzaj : String = ""
 
+    private var nazwaUzytkownika : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         //Funkcja tworząca globalną zmienną
         val displayMetrics  = resources.displayMetrics
@@ -76,13 +83,23 @@ class MainActivity : AppCompatActivity() {
         pobierzWysokosc(screenHeight)
 
         val zapisaneDane = ObslugaPrzechowywaniaDanych(this)
+        nazwaUzytkownika = zapisaneDane.nazwaUzytkownika()!!
         iloscPowi = zapisaneDane.iloscPowiadomien()
 
-        //tymczasowy layout - add lokalizacja
-        val intent_lokalizacja = Intent(this, DodawanieLokalizacji::class.java)
-        startActivity(intent_lokalizacja)
+        val intent_rejestracja = Intent(this, Rejestracja::class.java)
 
+        //Obsługa zalogowania
+        if(!zapisaneDane.czyZalogowany()){
+            startActivity(intent_rejestracja)
+        }
 
+        //Nazwa uzytkownika
+
+        val header = layoutInflater.inflate(R.layout.nav_header, null, false)
+        header.findViewById<TextView>(R.id.nazwaUzytkownikaNav).text = nazwaUzytkownika
+
+        //Obsługa bloczków
+        Bloczki()
 
         //Obsługa powiadomień
 
@@ -123,13 +140,14 @@ class MainActivity : AppCompatActivity() {
        // toolbar.setNavigationIcon(R.drawable.user_icon_vector)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+
         navigationView.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.nav_home -> drawerLayout.closeDrawers()
                 R.id.nav_settings -> startActivity(intent_userpanel)
                 R.id.nav_about -> Toast.makeText(applicationContext, "ab", Toast.LENGTH_SHORT).show()
                 //wylogowywanie
-                R.id.nav_logout -> Toast.makeText(applicationContext, "logout", Toast.LENGTH_SHORT).show()
+                R.id.nav_logout -> startActivity(intent_rejestracja)
                 }
             true
         }
@@ -157,19 +175,6 @@ class MainActivity : AppCompatActivity() {
         val rok = calendar.get(Calendar.YEAR)
         var dzisiejszaData = "$rok-$miesiac-$dzien"
 
-
-        //wpisywanie do bazy danych
-
-        val intent = Intent(this, DodajDane::class.java)
-        startActivity(intent)
-
-
-        //wypisywanie z bazy danych
-
-        db=DatabaseHelper(this)
-        val wszystkie_daty = db.wypiszWszystkieDate(true, dzisiejszaData)
-
-        val najblizsza = wszystkie_daty.minOfOrNull { it.date }?.let { LocalDate.parse(it).format(formatDaty)}?: "Pusta baza"
 
 
         // Termin Najbliższego wywozu i jego typ
@@ -206,6 +211,62 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun Bloczki(){
+        val papiery = findViewById<TextView>(R.id.papieryBlokData)
+        val metal = findViewById<TextView>(R.id.metalBlokData)
+        val szklo = findViewById<TextView>(R.id.szkloBlokData)
+        val bio = findViewById<TextView>(R.id.bioBlokData)
+
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd.MM", Locale.getDefault())
+
+        try {
+            val connectionHelper = ConnectionHelper()
+            val connect = connectionHelper.connectionClass()
+            if(connect!= null){
+                val queryPapier = "SELECT w.Termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika' AND rw.Rodzaj = 'Papier' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1;"
+
+                val queryMetal = "SELECT w.Termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika' AND rw.Rodzaj = 'Metale i tworzywa sztuczne' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1;"
+
+                val querySzklo = "SELECT w.Termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika' AND rw.Rodzaj = 'Szkło' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1;"
+
+                val queryBio = "SELECT w.Termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika' AND rw.Rodzaj = 'Odpady Bio' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1;"
+
+                val statement = connect.createStatement()
+                var result = statement.executeQuery(queryPapier)
+                papiery.text = "Brak danych"
+                while(result.next()){
+                    val date : Date = inputFormat.parse(result.getString("termin"))
+                    val wynik : String = outputFormat.format(date)
+                    papiery.setText(wynik)
+                }
+                result = statement.executeQuery(queryMetal)
+                metal.text = "Brak danych"
+                while (result.next()){
+                    val date : Date = inputFormat.parse(result.getString("termin"))
+                    val wynik : String = outputFormat.format(date)
+                    metal.setText(wynik)
+                }
+                result = statement.executeQuery(querySzklo)
+                szklo.text = "Brak danych"
+                while (result.next()){
+                    val date : Date = inputFormat.parse(result.getString("termin"))
+                    val wynik : String = outputFormat.format(date)
+                    szklo.setText(wynik)
+                }
+                result = statement.executeQuery(queryBio)
+                bio.text = "Brak danych"
+                while (result.next()){
+                    val date : Date = inputFormat.parse(result.getString("termin"))
+                    val wynik : String = outputFormat.format(date)
+                    bio.setText(wynik)
+                }
+
+            }
+        } catch (ex: Exception){
+            Log.e("ErrorBloczki", ex.message?: "Nieznany błąd")
+        }
+    }
 
     //wybieranie opcji - nawigacja
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -239,7 +300,6 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-
     private fun getTime(): Long{
         //ustawienie kiedy powiadomienie
         val minute = 0
@@ -263,8 +323,6 @@ class MainActivity : AppCompatActivity() {
         notificationManager.createNotificationChannel(channel)
     }
 
-
-
     private fun checkExactAlarmPermission(){
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !alarmManager.canScheduleExactAlarms()){
@@ -273,6 +331,41 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    /*private fun wywozyKalendarz(){
+        try {
+            val formatDaty = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            var kalendarz = Calendar.getInstance()
+            val connectionHelper = ConnectionHelper()
+            val connect = connectionHelper.connectionClass()
+            if(connect!= null){
+                val query = "SELECT w.* FROM Wywozy w JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika';"
+                val statement = connect.createStatement()
+                val result = statement.executeQuery(query)
+                while(result.next()){
+                    termin = result.getString("Termin")
+                    var data = formatDaty.parse(termin)
+                    kalendarz.time = data
+                    uzupelnijKalendarz(kalendarz.get(Calendar.DAY_OF_MONTH), kalendarz.get(Calendar.MONTH), kalendarz.get(Calendar.YEAR))
+                    rodzaj = result.getString("Rodzaj")
+                }
+            }
+        } catch (ex:Exception){
+            Log.e("ErrorWypis", ex.message?: "Nieznany błąd")
+        }
+    }
+
+    private fun uzupelnijKalendarz(day: Int, month: Int, year: Int){
+        var kalendarzView = findViewById<CalendarView>(R.id.calendar)
+        val kalendarzWybrana = Calendar.getInstance().apply {
+            set(Calendar.YEAR, 2024)
+            set(Calendar.MONTH, 11)
+            set(Calendar.DAY_OF_MONTH, 20)
+        }
+        kalendarzView.date = kalendarzWybrana.timeInMillis
+
+        kalendarzView.setBackgroundColor(resources.getColor(R.color.green_dark_button))
+    }*/
 
 }
 

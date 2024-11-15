@@ -1,5 +1,6 @@
 package com.example.smieci
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -9,6 +10,7 @@ import android.view.Gravity
 import android.view.Menu
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import android.widget.ToggleButton
@@ -25,11 +27,23 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.marginTop
 import androidx.core.view.setMargins
+import androidx.transition.Visibility
 import com.example.smieci.databinding.DodawanieInformacjiBinding
 import com.example.smieci.databinding.DodawanieLokalizacjiBinding
 
 class DodawanieInformacji : AppCompatActivity() {
     private lateinit var binding: DodawanieInformacjiBinding
+
+
+    lateinit var zamieszkaly : ToggleButton
+    lateinit var niezamieszkaly : ToggleButton
+    lateinit var segregujacy : ToggleButton
+    lateinit var niesegregujacy : ToggleButton
+    lateinit var jednorodzinna : ToggleButton
+    lateinit var wielorodzinna : ToggleButton
+    lateinit var wysoka : ToggleButton
+    lateinit var pozostale : ToggleButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DodawanieInformacjiBinding.inflate(layoutInflater)
@@ -37,6 +51,14 @@ class DodawanieInformacji : AppCompatActivity() {
 
         var EkranInformacji = findViewById<ConstraintLayout>(R.id.EkranInformacji)
         EkranInformacji.minHeight= wysokoscEkranu
+
+
+        val bundle = intent.extras
+        val nazwaUzytkownika = bundle?.getString("nazwaUzytkownika")!!
+        val email = bundle.getString("email")!!
+        val haslo = bundle.getString("haslo")!!
+
+
 
         //Tworzenie ToggleButton'ów Wysoka-Pozostałe
 
@@ -47,8 +69,9 @@ class DodawanieInformacji : AppCompatActivity() {
             setBackgroundResource(R.drawable.toggle_options_bg)
             orientation = LinearLayout.HORIZONTAL
             layoutParams = LinearLayout.LayoutParams(280.toPx(), 45.toPx())
+            visibility = LinearLayout.GONE
         }
-        val wysoka = ToggleButton(this).apply {
+        wysoka = ToggleButton(this).apply {
             id = View.generateViewId()
             text = "ToggleButton"
             textOn = getString(R.string.Wysoka)
@@ -73,7 +96,7 @@ class DodawanieInformacji : AppCompatActivity() {
             setBackgroundResource(R.drawable.vertical_line)
         }
 
-        val pozostale = ToggleButton(this).apply {
+        pozostale = ToggleButton(this).apply {
             id = View.generateViewId()
             text = "ToggleButton"
             textOn = getString(R.string.Pozostałe)
@@ -96,9 +119,10 @@ class DodawanieInformacji : AppCompatActivity() {
             setBackgroundResource(R.drawable.toggle_options_bg)
             orientation = LinearLayout.HORIZONTAL
             layoutParams = LinearLayout.LayoutParams(280.toPx(), 45.toPx())
+            visibility = LinearLayout.GONE
         }
 
-        val jednorodzinna = ToggleButton(this).apply {
+        jednorodzinna = ToggleButton(this).apply {
             id = View.generateViewId()
             text="ToggleButton"
             textOn = getString(R.string.jednorodzinna)
@@ -123,7 +147,7 @@ class DodawanieInformacji : AppCompatActivity() {
             setBackgroundResource(R.drawable.vertical_line)
         }
 
-        val wielorodzinna = ToggleButton(this).apply {
+        wielorodzinna = ToggleButton(this).apply {
             id = View.generateViewId()
             text="ToggleButton"
             textOn = getString(R.string.wielorodzinna)
@@ -139,19 +163,47 @@ class DodawanieInformacji : AppCompatActivity() {
             setBackgroundResource(R.drawable.toggle_button_background)
         }
 
+        linearLayoutRodzina.addView(jednorodzinna)
+        linearLayoutRodzina.addView(liniaRodzina)
+        linearLayoutRodzina.addView(wielorodzinna)
+        EkranInformacji.addView(linearLayoutRodzina)
+
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(EkranInformacji)
+
+        constraintSet.connect(linearLayoutRodzina.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END,0)
+        constraintSet.connect(linearLayoutRodzina.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP,400.toPx())
+        constraintSet.connect(linearLayoutRodzina.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START,0)
+
+        constraintSet.applyTo(EkranInformacji)
+
+        linearLayoutWP.addView(wysoka)
+        linearLayoutWP.addView(liniaWP)
+        linearLayoutWP.addView(pozostale)
+        linearLayoutWP.invalidate()
+        EkranInformacji.addView(linearLayoutWP)
+
+        constraintSet.clone(EkranInformacji)
+
+        constraintSet.connect(linearLayoutWP.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END,0)
+        constraintSet.connect(linearLayoutWP.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP,470.toPx())
+        constraintSet.connect(linearLayoutWP.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START,0)
+
+        constraintSet.applyTo(EkranInformacji)
+
         //Obsługa wyborów
 
-        val zamieszkaly = findViewById<ToggleButton>(R.id.toggleOp1_1)
-        val niezamieszkaly = findViewById<ToggleButton>(R.id.toggleOp1_2)
+        zamieszkaly = findViewById<ToggleButton>(R.id.toggleOp1_1)
+        niezamieszkaly = findViewById<ToggleButton>(R.id.toggleOp1_2)
 
-        val segregujacy = findViewById<ToggleButton>(R.id.toggleOp4_1)
-        val niesegregujacy = findViewById<ToggleButton>(R.id.toggleOp4_2)
+        segregujacy = findViewById<ToggleButton>(R.id.toggleOp4_1)
+        niesegregujacy = findViewById<ToggleButton>(R.id.toggleOp4_2)
 
         var zamieszkanie: String = ""
 
-        var rodzajRodzinny : String = ""
+        var rodzajRodzinny : String = "null"
 
-        var rodzajWP : String = ""
+        var rodzajWP : String = "null"
         val segregacja = findViewById<LinearLayout>(R.id.Segregacja)
         val segregacjaParams = segregacja.layoutParams as ConstraintLayout.LayoutParams
 
@@ -159,31 +211,18 @@ class DodawanieInformacji : AppCompatActivity() {
         zamieszkaly.setOnCheckedChangeListener{ _, isChecked ->
             if(isChecked){
                 niezamieszkaly.isChecked = false
-                zamieszkanie = (zamieszkaly.text).toString()
+                zamieszkanie = "zamieszkała"
 
-                linearLayoutRodzina.addView(jednorodzinna)
-                linearLayoutRodzina.addView(liniaRodzina)
-                linearLayoutRodzina.addView(wielorodzinna)
-                linearLayoutRodzina.invalidate()
-                EkranInformacji.addView(linearLayoutRodzina)
-
-                val constraintSet = ConstraintSet()
-                constraintSet.clone(EkranInformacji)
-
-                constraintSet.connect(linearLayoutRodzina.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END,0)
-                constraintSet.connect(linearLayoutRodzina.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP,400.toPx())
-                constraintSet.connect(linearLayoutRodzina.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START,0)
-
-                constraintSet.applyTo(EkranInformacji)
+                linearLayoutRodzina.visibility = LinearLayout.VISIBLE
 
                 //kiedy kliknięta Jednorodzinna
                 jednorodzinna.setOnCheckedChangeListener{ _, isChecked ->
                     if(isChecked){
                         wielorodzinna.isChecked = false
                         rodzajRodzinny = (jednorodzinna.text).toString()
+                        rodzajWP = "null"
 
-                        linearLayoutWP.removeAllViews()
-                        EkranInformacji.removeView(linearLayoutWP)
+                        linearLayoutWP.visibility = LinearLayout.GONE
 
                         segregacjaParams.topMargin = 470.toPx()
                         segregacja.layoutParams = segregacjaParams
@@ -199,21 +238,7 @@ class DodawanieInformacji : AppCompatActivity() {
                         jednorodzinna.isChecked = false
                         rodzajRodzinny = (wielorodzinna.text).toString()
 
-                        linearLayoutWP.addView(wysoka)
-                        linearLayoutWP.addView(liniaWP)
-                        linearLayoutWP.addView(pozostale)
-                        linearLayoutWP.invalidate()
-                        EkranInformacji.addView(linearLayoutWP)
-
-
-                        val constraintSet = ConstraintSet()
-                        constraintSet.clone(EkranInformacji)
-
-                        constraintSet.connect(linearLayoutWP.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END,0)
-                        constraintSet.connect(linearLayoutWP.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP,470.toPx())
-                        constraintSet.connect(linearLayoutWP.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START,0)
-
-                        constraintSet.applyTo(EkranInformacji)
+                        linearLayoutWP.visibility = LinearLayout.VISIBLE
 
                         //kiedy kliknięta Wysoka
                         wysoka.setOnCheckedChangeListener{_, isChecked ->
@@ -236,11 +261,12 @@ class DodawanieInformacji : AppCompatActivity() {
                     }
                     //kiedy odkliknięte Wielorodzina
                     else {
-                        linearLayoutWP.removeAllViews()
-                        EkranInformacji.removeView(linearLayoutWP)
+                        linearLayoutWP.visibility = LinearLayout.GONE
                         segregacjaParams.topMargin = 470.toPx()
                         segregacja.layoutParams = segregacjaParams
 
+                        rodzajRodzinny = "null"
+                        rodzajWP = "null"
                         wysoka.isChecked = false
                         pozostale.isChecked = false
                     }
@@ -253,15 +279,15 @@ class DodawanieInformacji : AppCompatActivity() {
             }
             //kiedy odkliknięty Zamieszkały
             else {
-                linearLayoutRodzina.removeAllViews()
-                EkranInformacji.removeView(linearLayoutRodzina)
+                linearLayoutRodzina.visibility = LinearLayout.GONE
 
-                linearLayoutWP.removeAllViews()
-                EkranInformacji.removeView(linearLayoutWP)
+                linearLayoutWP.visibility = LinearLayout.GONE
 
                 segregacjaParams.topMargin = 400.toPx()
                 segregacja.layoutParams = segregacjaParams
 
+                rodzajRodzinny = "null"
+                rodzajWP = "null"
                 jednorodzinna.isChecked = false
                 wielorodzinna.isChecked = false
             }
@@ -271,13 +297,13 @@ class DodawanieInformacji : AppCompatActivity() {
         niezamieszkaly.setOnCheckedChangeListener{ _, isChecked ->
             if(isChecked){
                 zamieszkaly.isChecked = false
-                zamieszkanie = (niezamieszkaly.text).toString()
+                zamieszkanie = "niezamieszkała"
+                rodzajRodzinny = "null"
+                rodzajWP = "null"
 
-                linearLayoutRodzina.removeAllViews()
-                EkranInformacji.removeView(linearLayoutRodzina)
+                linearLayoutRodzina.visibility = LinearLayout.GONE
 
-                linearLayoutWP.removeAllViews()
-                EkranInformacji.removeView(linearLayoutWP)
+                linearLayoutWP.visibility = LinearLayout.GONE
 
                 segregacjaParams.topMargin = 400.toPx()
                 segregacja.layoutParams = segregacjaParams
@@ -305,10 +331,51 @@ class DodawanieInformacji : AppCompatActivity() {
 
         //Obsługa przycisku ZATWIERDŹ
         findViewById<Button>(R.id.buttonSubmit).setOnClickListener{
+            if(walidacja()){
+                val intent_lokalizacja = Intent(this, DodawanieLokalizacji::class.java)
+                intent_lokalizacja.putExtra("nazwaUzytkownika", nazwaUzytkownika)
+                intent_lokalizacja.putExtra("email", email)
+                intent_lokalizacja.putExtra("haslo", haslo)
+                intent_lokalizacja.putExtra("zamieszkanieTyp", zamieszkanie)
+                intent_lokalizacja.putExtra("rodzinaRodzaj", rodzajRodzinny)
+                intent_lokalizacja.putExtra("rodzajWP", rodzajWP)
+                intent_lokalizacja.putExtra("rodzajSegregacji", rodzajSegregacji)
+                startActivity(intent_lokalizacja)
+            } else {
+                Toast.makeText(this, "Zaznacz wszystkie dostępne opcje", Toast.LENGTH_LONG).show()
+            }
             //Toast.makeText(this, "${zamieszkanie} ${rodzajRodzinny} ${rodzajWP} ${rodzajSegregacji}", Toast.LENGTH_LONG).show()
-            val intent_lokalizacja = Intent(this, DodawanieLokalizacji::class.java)
-            startActivity(intent_lokalizacja)
+        }
+
+        //Obsługa przycisku cofnij
+        findViewById<ImageView>(R.id.cofnij).setOnClickListener {
+            finish()
         }
     }
+
+    private fun walidacja() : Boolean{
+        if(segregujacy.isChecked || niesegregujacy.isChecked){
+            if(zamieszkaly.isChecked){
+                if(wielorodzinna.isChecked){
+                    if(wysoka.isChecked || pozostale.isChecked){
+                        return true
+                    } else {
+                        return false
+                    }
+                } else if(jednorodzinna.isChecked) {
+                    return true
+                } else {
+                    return false
+                }
+            } else if(niezamieszkaly.isChecked){
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+
     fun Int.toPx(): Int = (this * resources.displayMetrics.density).toInt()
 }

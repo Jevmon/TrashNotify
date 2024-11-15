@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.smieci.databinding.EdytowanieLokalizacjiBinding
@@ -30,6 +31,11 @@ class EdytowanieLokalizacji : AppCompatActivity() {
             startActivity(intent_userPanel)
         }
 
+
+        findViewById<ToggleButton>(R.id.toggleLokalizacja).setOnClickListener {
+            var intent_edytowanieInformacji = Intent(this, EdytowanieInformacji::class.java)
+            startActivity(intent_edytowanieInformacji)
+        }
 
     }
 }

@@ -35,7 +35,7 @@ class ObslugaPrzechowywaniaDanych(private val context: Context) {
         editor.apply()
     }
     fun ustawieniePowiadomienia(): Boolean{
-        return sharedPreferences.getBoolean("Powiadomienia", true)
+        return sharedPreferences.getBoolean("Powiadomienia", false)
     }
 
     //Motyw
@@ -57,15 +57,23 @@ class ObslugaPrzechowywaniaDanych(private val context: Context) {
     fun nazwaUzytkownika() : String?{
         return sharedPreferences.getString("NazwaUzytkownika", "Uzytkownik")
     }
-
-    //Haslo - USUNĄĆ PRZY ZMIANIE NA BAZE DANYCH
-    fun zapiszHaslo(haslo: String){
+    //Email
+    fun zapiszEmail(nazwa: String){
         val editor = sharedPreferences.edit()
-        editor.putString("Haslo", haslo)
+        editor.putString("Email", nazwa)
         editor.apply()
     }
+    fun email() : String?{
+        return sharedPreferences.getString("Email", "Email")
+    }
 
-    fun Haslo(): String?{
-        return sharedPreferences.getString("Haslo", "x")
+    //Zalogowany
+    fun zalogowany(zalogowany : Boolean){
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("zalogowany", zalogowany)
+        editor.apply()
+    }
+    fun czyZalogowany(): Boolean{
+        return sharedPreferences.getBoolean("zalogowany", false)
     }
 }

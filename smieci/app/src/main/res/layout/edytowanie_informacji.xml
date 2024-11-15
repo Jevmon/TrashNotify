@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    tools:context=".EdytowanieInformacji"
     >
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/EkranLogowania"
+        android:id="@+id/ekranEdycjaInformacji"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/light_green"
@@ -25,6 +26,7 @@
             android:layout_marginTop="340dp">
 
             <LinearLayout
+                android:id="@+id/zamieszkanie"
                 android:layout_width="280dp"
                 android:layout_height="45dp"
                 android:background="@drawable/toggle_options_bg"
@@ -32,7 +34,7 @@
                 android:layout_marginVertical="10dp">
 
                 <ToggleButton
-                    android:id="@+id/toggleOp1_1"
+                    android:id="@+id/zamieszkaly"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -56,7 +58,7 @@
                     android:background="@drawable/vertical_line" />
 
                 <ToggleButton
-                    android:id="@+id/toggleOp1_2"
+                    android:id="@+id/niezamieszkaly"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -74,15 +76,17 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/rodzina"
                 android:layout_width="280dp"
                 android:layout_height="45dp"
                 android:background="@drawable/toggle_options_bg"
                 android:orientation="horizontal"
                 android:layout_marginVertical="10dp"
+                android:visibility="gone"
                 >
 
                 <ToggleButton
-                    android:id="@+id/toggleOp2_1"
+                    android:id="@+id/jednorodzinna"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -106,7 +110,7 @@
                     android:background="@drawable/vertical_line" />
 
                 <ToggleButton
-                    android:id="@+id/toggleOp2_2"
+                    android:id="@+id/wielorodzinna"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -125,14 +129,16 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/wp"
                 android:layout_width="280dp"
                 android:layout_height="45dp"
                 android:background="@drawable/toggle_options_bg"
                 android:orientation="horizontal"
-                android:layout_marginVertical="10dp">
+                android:layout_marginVertical="10dp"
+                android:visibility="gone">
 
                 <ToggleButton
-                    android:id="@+id/toggleOp3_1"
+                    android:id="@+id/wysoka"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -156,7 +162,7 @@
                     android:background="@drawable/vertical_line" />
 
                 <ToggleButton
-                    android:id="@+id/toggleOp3_2"
+                    android:id="@+id/pozostale"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -175,6 +181,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/segregacja"
                 android:layout_width="280dp"
                 android:layout_height="45dp"
 
@@ -183,7 +190,7 @@
                 android:layout_marginVertical="10dp">
 
                 <ToggleButton
-                    android:id="@+id/toggleOp4_1"
+                    android:id="@+id/segregujacy"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -207,7 +214,7 @@
                     android:background="@drawable/vertical_line" />
 
                 <ToggleButton
-                    android:id="@+id/toggleOp4_2"
+                    android:id="@+id/niesegregujacy"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -292,28 +299,28 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ToggleButton
-                android:id="@+id/toggleLokalizacja"
+                android:id="@+id/toggleInformacje"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/toggle_option_informacje"
                 android:stateListAnimator="@null"
                 android:textOn="@string/informacje"
                 android:textOff="@string/informacje"
-                android:checked="true"
+                android:checked="false"
                 android:textSize="16sp"
                 android:layout_weight="1"
                 android:textColor="@drawable/toggle_button_text_color"
                 />
 
             <ToggleButton
-                android:id="@+id/toggleInformacje"
+                android:id="@+id/toggleLokalizacja"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textOn="@string/lokalizacja"
                 android:textOff="@string/lokalizacja"
                 android:background="@drawable/toggle_option_lokalizacja"
                 android:stateListAnimator="@null"
-                android:checked="false"
+                android:checked="true"
                 android:textSize="16sp"
                 android:textColor="@drawable/toggle_button_text_color"
                 android:layout_weight="1"/>

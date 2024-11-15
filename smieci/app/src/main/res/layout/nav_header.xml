@@ -13,6 +13,7 @@
         android:layout_height="70dp"
         android:src="@drawable/user_icon"/>
     <TextView
+        android:id="@+id/nazwaUzytkownikaNav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/user_name"

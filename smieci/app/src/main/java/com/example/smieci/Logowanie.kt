@@ -2,6 +2,7 @@ package com.example.smieci
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.widget.Button
 import android.widget.EditText
@@ -24,17 +25,32 @@ class Logowanie : AppCompatActivity() {
 
         findViewById<ConstraintLayout>(R.id.EkranLogowania).minHeight= wysokoscEkranu
 
-        //Obsługa przycisku POMIŃ
-        findViewById<LinearLayout>(R.id.linearLayoutPomin).setOnClickListener{
-            val intent_informacje = Intent(this, DodawanieInformacji::class.java)
-            startActivity(intent_informacje)
-        }
+        val zapisaneDane = ObslugaPrzechowywaniaDanych(this)
 
         //Obsługa przycisku ZATWIERDŹ
         findViewById<Button>(R.id.button).setOnClickListener {
             val email = findViewById<EditText>(R.id.editTextEmail).text
             val password = findViewById<EditText>(R.id.editTextHaslo).text
-            Toast.makeText(this, "${email} ${password}", Toast.LENGTH_LONG).show()
+            try{
+                val connectionHelper = ConnectionHelper()
+                val connect = connectionHelper.connectionClass()
+                if(connect!=null){
+                    var query = "SELECT * FROM Uzytkownik WHERE Email = '$email' AND Haslo = '$password'"
+                    val statement = connect.createStatement()
+                    val result = statement.executeQuery(query)
+                    if(result.next()){
+                        zapisaneDane.zapiszNazweUzytkownika(result.getString("Nazwa_uzytkownika"))
+                        zapisaneDane.zapiszEmail(result.getString("Email"))
+                        zapisaneDane.zalogowany(true)
+                        val intent_main = Intent(this, MainActivity::class.java)
+                        startActivity(intent_main)
+                    } else {
+                        Toast.makeText(this, "Błędne dane", Toast.LENGTH_LONG).show()
+                    }
+                }
+            } catch (ex: Exception){
+                Log.e("ErrorLogowanie", ex.message?: "Nieznany błąd")
+            }
         }
 
         //Obsługa przycisku Zarejestruj się

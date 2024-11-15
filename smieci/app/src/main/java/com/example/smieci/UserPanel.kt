@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract.CommonDataKinds.Im
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
@@ -42,7 +43,8 @@ class UserPanel : AppCompatActivity() {
 
         //Obsługa cofnięcia
         findViewById<ImageView>(R.id.cofnij).setOnClickListener {
-            finish()
+            var intent_main = Intent(this, MainActivity::class.java)
+            startActivity(intent_main)
         }
 
         //tworzenie obiektów potrzebnych do zmiany nazwy urzytkownika
@@ -138,8 +140,18 @@ class UserPanel : AppCompatActivity() {
 
         //Zatwierdzenie nowej nazwy
         zatwierdz.setOnClickListener {
-            textViewZmiana.setText(editText.text)
+            try{
+                val connectionHelper = ConnectionHelper()
+                val connect = connectionHelper.connectionClass()
+                if(connect!=null){
+                    val query="UPDATE Uzytkownik SET Nazwa_uzytkownika = '${editText.text}' WHERE email='${zapisaneDane.email()}'"
+                    connect.prepareStatement(query).executeUpdate()
+                }
+            }catch (ex:Exception){
+                Log.e("ErrorZmianaNazwyUżytkownika", ex.message?: "Nieznany błąd")
+            }
             zapisaneDane.zapiszNazweUzytkownika(editText.text.toString())
+            textViewZmiana.setText(editText.text)
             textViewZmiana.visibility = View.VISIBLE
             imageViewZmiana.visibility = View.VISIBLE
             layoutNazwy.removeView(editText)
@@ -159,23 +171,38 @@ class UserPanel : AppCompatActivity() {
         }
 
         powiadomieniaSwitch.setOnCheckedChangeListener{_, Zaznaczone ->
-            if(Zaznaczone){
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED){
-                    requestNotificationPermission(this)
+            try{
+                val connectionHelper = ConnectionHelper()
+                val connect = connectionHelper.connectionClass()
+                if(connect!=null){
+                    var query : String
+                    if(Zaznaczone){
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED){
+                            requestNotificationPermission(this)
+                        }
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED){
+                            zapisaneDane.zapiszPowiadomienia(false)
+                            query = "UPDATE Uzytkownik SET Ustawienia_powiadomien = 0"
+                            connect.prepareStatement(query).executeUpdate()
+                            powiadomieniaSwitch.isChecked = false
+                        } else {
+                            query = "UPDATE Uzytkownik SET Ustawienia_powiadomien = 1"
+                            connect.prepareStatement(query).executeUpdate()
+                            zapisaneDane.zapiszPowiadomienia(true)
+                        }
+                    } else {
+                        query = "UPDATE Uzytkownik SET Ustawienia_powiadomien = 0"
+                        connect.prepareStatement(query).executeUpdate()
+                        zapisaneDane.zapiszPowiadomienia(false)
+                    }
                 }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED){
-                    zapisaneDane.zapiszPowiadomienia(false)
-                    powiadomieniaSwitch.isChecked = false
-                } else {
-                    zapisaneDane.zapiszPowiadomienia(true)
-                }
-            } else {
-                zapisaneDane.zapiszPowiadomienia(false)
+            } catch (ex:Exception){
+                Log.e("ErrorPowiadomieniaSwitch", ex.message?: "Nieznany błąd")
             }
         }
 
         //Obsługa NightMode - DayMode
-        val motywSwitch = findViewById<Switch>(R.id.motywSwitch)
+        /*val motywSwitch = findViewById<Switch>(R.id.motywSwitch)
         if(zapisaneDane.ustawienieMotyw()){
             motywSwitch.isChecked = true
         }
@@ -185,7 +212,7 @@ class UserPanel : AppCompatActivity() {
             } else {
                 zapisaneDane.zapiszMotyw(false)
             }
-        }
+        }*/
 
         //Obsługa przycisku edytuj adres zamieszkania
         findViewById<LinearLayout>(R.id.EdytujAdresZamieszakniaLayout).setOnClickListener {
