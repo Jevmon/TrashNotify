@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:id="@+id/scrollViewD"
     >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/EkranEdycjaLokalizacji"
@@ -12,11 +13,9 @@
         android:layout_height="match_parent"
         android:background="@color/light_green"
         >
-
-
-
+<!--
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -28,102 +27,135 @@
             android:gravity="center"
             >
 
+
             <LinearLayout
-                android:id="@+id/layoutGminaWybierz"
-                android:layout_width="260dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/pole_input"
-                android:layout_marginVertical="10dp"
+                android:id="@+id/listViewParentG"
+                android:layout_width="240dp"
+                android:layout_height="200dp"
+                app:layout_constraintTop_toBottomOf="@id/editText_Gmina"
+                android:orientation="vertical"
+                android:background="@drawable/wyszukiwanie_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="gone"
+                android:elevation="5dp"
                 >
-
-                <TextView
-                    android:id="@+id/textGminaWybierz"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ListView
+                    android:id="@+id/list_View_Gminy"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:text="@string/gmina"
-                    android:textColor="@color/gray_text"
-                    android:textSize="16sp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="40dp"/>
+                    android:clickable="true"
+                    android:visibility="visible"
+                    android:layout_gravity="top"
+                    >
 
-                <ImageView
-                    android:id="@+id/imageStrzalka1"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_gravity="center"
-                    app:srcCompat="@drawable/down" />
-
+                </ListView>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layoutMiejscWybierz"
-                android:layout_width="260dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/pole_input"
-                android:orientation="horizontal"
-                android:layout_marginVertical="10dp"
+                android:id="@+id/listViewParentM"
+                android:layout_width="240dp"
+                android:layout_height="200dp"
+                app:layout_constraintTop_toBottomOf="@id/editTextMiejscowosc"
+                android:orientation="vertical"
+                android:background="@drawable/wyszukiwanie_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="gone"
+                android:elevation="5dp"
                 >
-
-                <TextView
-                    android:id="@+id/textMiejscowoscWybierz"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:text="@string/miejscowosc"
-                    android:textColor="@color/gray_text"
-                    android:textSize="16sp"
+                <ListView
+                    android:id="@+id/list_View_Miejsc"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="40dp"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:clickable="true"
+                    android:visibility="visible"
+                    android:layout_gravity="top"
+                    >
 
-                <ImageView
-                    android:id="@+id/imageStrzalka2"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="20dp"
-                    app:srcCompat="@drawable/down" />
-
+                </ListView>
             </LinearLayout>
 
 
             <LinearLayout
-                android:id="@+id/layoutUlicaWybierz"
-                android:layout_width="260dp"
+                android:id="@+id/listViewParentU"
+                android:layout_width="240dp"
+                android:layout_height="200dp"
+                app:layout_constraintTop_toBottomOf="@id/editTextUlica"
+                android:orientation="vertical"
+                android:background="@drawable/wyszukiwanie_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="gone"
+                android:elevation="5dp"
+                >
+                <ListView
+                    android:id="@+id/list_View_Ulica"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:visibility="visible"
+                    android:layout_gravity="top"
+                    >
+
+                </ListView>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/editText_Gmina"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/pole_input"
-                android:orientation="horizontal"
-                android:layout_marginVertical="10dp"
-                >
+                android:ems="10"
+                android:hint="@string/gmina"
+                android:inputType="text"
+                android:padding="12dp"
+                android:paddingStart="15dp"
+                android:textColor="@color/gray_text"
+                android:textColorHint="@color/light_gray_hint"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:text="@string/ulica"
-                    android:textColor="@color/gray_text"
-                    android:textSize="16sp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="40dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+            <EditText
+                android:id="@+id/editTextMiejscowosc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/pole_input"
+                android:ems="10"
+                android:hint="@string/miejscowosc"
+                android:inputType="text"
+                android:padding="12dp"
+                android:paddingStart="15dp"
+                android:textColor="@color/gray_text"
+                android:textColorHint="@color/light_gray_hint"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/imageStrzalka"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="20dp"
-                    app:srcCompat="@drawable/down" />
-            </LinearLayout>
+            <EditText
+                android:id="@+id/editTextUlica"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/pole_input"
+                android:ems="10"
+                android:hint="@string/ulica"
+                android:inputType="text"
+                android:padding="12dp"
+                android:paddingStart="15dp"
+                android:textColor="@color/gray_text"
+                android:textColorHint="@color/light_gray_hint"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/buttonSubmit"
@@ -135,7 +167,182 @@
                 android:textSize="15sp"
                 android:layout_marginTop="50dp" />
         </LinearLayout>
+-->
+        <LinearLayout
+            android:id="@+id/listViewParentG"
+            android:layout_width="240dp"
+            android:layout_height="200dp"
+            app:layout_constraintTop_toBottomOf="@id/editText_Gmina"
+            android:orientation="vertical"
+            android:background="@drawable/wyszukiwanie_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="gone"
+            android:elevation="5dp"
+            >
+            <ListView
+                android:id="@+id/list_View_Gminy"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:visibility="visible"
+                android:layout_gravity="top"
+                >
 
+            </ListView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/listViewParentM"
+            android:layout_width="240dp"
+            android:layout_height="200dp"
+            app:layout_constraintTop_toBottomOf="@id/editTextMiejscowosc"
+            android:orientation="vertical"
+            android:background="@drawable/wyszukiwanie_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="gone"
+            android:elevation="5dp"
+            >
+            <ListView
+                android:id="@+id/list_View_Miejsc"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:visibility="visible"
+                android:layout_gravity="top"
+                >
+
+            </ListView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/listViewParentU"
+            android:layout_width="240dp"
+            android:layout_height="200dp"
+            app:layout_constraintTop_toBottomOf="@id/editTextUlica"
+            android:orientation="vertical"
+            android:background="@drawable/wyszukiwanie_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="gone"
+            android:elevation="5dp"
+            >
+            <ListView
+                android:id="@+id/list_View_Ulica"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:visibility="visible"
+                android:layout_gravity="top"
+                >
+
+            </ListView>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/editText_Gmina"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="360dp"
+            android:background="@drawable/pole_input"
+            android:ems="10"
+            android:inputType="text"
+            android:padding="12dp"
+            android:paddingStart="15dp"
+            android:hint="@string/gmina"
+            android:textColorHint="@color/light_gray_hint"
+            android:textSize="16sp"
+            android:textColor="@color/gray_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextMiejscowosc"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="440dp"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/miejscowosc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/pole_input"
+            android:padding="12dp"
+            android:textColor="@color/gray_text"
+            android:paddingStart="15dp"
+            android:textSize="16sp"
+            android:textColorHint="@color/light_gray_hint"/>
+
+        <EditText
+            android:id="@+id/editTextUlica"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="520dp"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/ulica"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/pole_input"
+            android:padding="12dp"
+            android:textColor="@color/gray_text"
+            android:paddingStart="15dp"
+            android:textSize="16sp"
+            android:textColorHint="@color/light_gray_hint"/>
+
+        <ImageView
+            android:id="@+id/imageEdit3"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="530dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.74"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/edit_text_icon" />
+
+        <ImageView
+            android:id="@+id/imageEdit1"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="370dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.74"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/edit_text_icon" />
+
+        <ImageView
+            android:id="@+id/imageEdit2"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="450dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.74"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/edit_text_icon" />
+
+        <Button
+            android:id="@+id/buttonSubmit"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="600dp"
+            android:background="@drawable/przycisk_zatwierdz"
+            android:text="@string/zatwierdz"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <LinearLayout
@@ -191,7 +398,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ToggleButton
-                android:id="@+id/toggleLokalizacja"
+                android:id="@+id/toggleInformacje"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/toggle_option_informacje"
@@ -205,7 +412,7 @@
                 />
 
             <ToggleButton
-                android:id="@+id/toggleInformacje"
+                android:id="@+id/toggleLokalizacja"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textOn="@string/lokalizacja"
