@@ -8,15 +8,15 @@
     <group android:checkableBehavior="single" >
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/padlock"
+            android:icon="@drawable/home"
             android:title="@string/strona_glowna" />
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/padlock"
+            android:icon="@drawable/setting"
             android:title="@string/ustawienia"/>
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/padlock"
+            android:icon="@drawable/information"
             android:title="@string/o_nas"/>
     </group>
     <item
@@ -24,7 +24,7 @@
         <menu>
             <item
                 android:id="@+id/nav_logout"
-                android:icon="@drawable/padlock"
+                android:icon="@drawable/logout"
                 android:title="@string/wyloguj"/>
         </menu>
     </item>

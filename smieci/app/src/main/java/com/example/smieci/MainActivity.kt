@@ -145,7 +145,7 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.nav_home -> drawerLayout.closeDrawers()
                 R.id.nav_settings -> startActivity(intent_userpanel)
-                R.id.nav_about -> Toast.makeText(applicationContext, "ab", Toast.LENGTH_SHORT).show()
+                R.id.nav_about -> Toast.makeText(applicationContext, "S2MZ", Toast.LENGTH_SHORT).show()
                 //wylogowywanie
                 R.id.nav_logout -> startActivity(intent_rejestracja)
                 }
