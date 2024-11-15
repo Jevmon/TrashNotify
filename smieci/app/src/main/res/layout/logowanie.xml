@@ -52,7 +52,7 @@
         android:id="@+id/button"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginTop="530dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/przycisk_zatwierdz"
         android:text="@string/zatwierdz"
         android:textColor="@color/white"
@@ -60,7 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextHaslo" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -100,11 +100,11 @@
         android:background="@drawable/pole_input"
         android:elevation="2dp"
         android:ems="10"
+        android:hint="@string/haslo"
         android:inputType="textPassword"
         android:paddingLeft="15dp"
-        android:hint="@string/haslo"
-        android:textColorHint="@color/light_gray_hint"
         android:textColor="@color/gray_text"
+        android:textColorHint="@color/light_gray_hint"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -126,13 +126,16 @@
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginBottom="30dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        >
 
         <TextView
             android:layout_width="wrap_content"
@@ -141,7 +144,7 @@
             android:paddingRight="5dp"
             android:text="@string/brak_konta"
             android:textFontWeight="500"
-            android:textSize="16sp">
+            android:textSize="18sp">
 
         </TextView>
 
@@ -152,7 +155,7 @@
             android:layout_gravity="center_vertical"
             android:text="@string/brak_konta_zaloguj"
             android:textFontWeight="500"
-            android:textSize="16sp">
+            android:textSize="18sp">
 
         </TextView>
     </LinearLayout>

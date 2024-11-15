@@ -12,5 +12,20 @@
         <item name="android:windowExitAnimation">@anim/slide_out</item>
     </style>
 
+    <style name="CalenderViewCustom" parent="Theme.AppCompat">
+        <item name="colorAccent">@color/light_green</item>
+        <item name="colorPrimary">@color/dark_gray</item>
+        <item name="android:textColorPrimary">@color/dark_gray</item>
+    </style>
+
+    <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:weekNumberColor">@color/light_green</item>
+    </style>
+
+    <style name="CalenderViewWeekCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/dark_gray</item>
+    </style>
+
 
 </resources>

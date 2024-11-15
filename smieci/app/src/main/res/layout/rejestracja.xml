@@ -189,7 +189,7 @@
             android:id="@+id/zatwierdz"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:layout_marginTop="560dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/przycisk_zatwierdz"
             android:text="@string/zatwierdz"
             android:textColor="@color/white"
@@ -197,38 +197,38 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextHasloPow" />
 
         <LinearLayout
             android:layout_width="300dp"
             android:layout_height="30dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="220dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="center_horizontal"
             android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:gravity="center_horizontal">
+            app:layout_constraintTop_toBottomOf="@+id/zatwierdz">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:text="@string/konto"
                 android:layout_gravity="center_vertical"
                 android:paddingEnd="5dp"
+                android:text="@string/konto"
                 android:textFontWeight="500"
-                android:textSize="16sp"
-                >
-            </TextView>
+                android:textSize="18sp"></TextView>
+
             <TextView
                 android:id="@+id/textOdnosnikLogowanie"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:text="@string/konto_zaloguj"
                 android:layout_gravity="center_vertical"
+                android:text="@string/konto_zaloguj"
                 android:textFontWeight="500"
-                android:textSize="16sp"
-                >
+                android:textSize="18sp">
 
             </TextView>
         </LinearLayout>
