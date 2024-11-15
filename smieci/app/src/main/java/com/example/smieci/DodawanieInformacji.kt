@@ -325,7 +325,7 @@ class DodawanieInformacji : AppCompatActivity() {
         niesegregujacy.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked){
                 segregujacy.isChecked = false
-                rodzajSegregacji = (segregujacy.text).toString()
+                rodzajSegregacji = (niesegregujacy.text).toString()
             }
         }
 

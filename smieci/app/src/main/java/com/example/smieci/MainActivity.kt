@@ -47,10 +47,11 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.graphics.toColor
-import java.lang.Exception
+import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.time.Month
 import java.util.Locale
+import kotlin.Exception
 
 
 class MainActivity : AppCompatActivity() {
@@ -70,7 +71,7 @@ class MainActivity : AppCompatActivity() {
     private var termin : String = ""
     private var rodzaj : String = ""
 
-    private var nazwaUzytkownika : String = ""
+    private var email : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,20 +84,21 @@ class MainActivity : AppCompatActivity() {
         pobierzWysokosc(screenHeight)
 
         val zapisaneDane = ObslugaPrzechowywaniaDanych(this)
-        nazwaUzytkownika = zapisaneDane.nazwaUzytkownika()!!
+        email = zapisaneDane.email()!!
         iloscPowi = zapisaneDane.iloscPowiadomien()
 
         val intent_rejestracja = Intent(this, Rejestracja::class.java)
 
         //Obsługa zalogowania
         if(!zapisaneDane.czyZalogowany()){
+            zapisaneDane.zalogowany(false)
             startActivity(intent_rejestracja)
         }
 
         //Nazwa uzytkownika
 
         val header = layoutInflater.inflate(R.layout.nav_header, null, false)
-        header.findViewById<TextView>(R.id.nazwaUzytkownikaNav).text = nazwaUzytkownika
+        header.findViewById<TextView>(R.id.nazwaUzytkownikaNav).text = zapisaneDane.nazwaUzytkownika()
 
         //Obsługa bloczków
         Bloczki()
@@ -109,7 +111,29 @@ class MainActivity : AppCompatActivity() {
 
             requestNotificationPermission(this)
 
-            powiadomienie()
+            val lista : MutableList<MutableList<String>> = mutableListOf()
+            try {
+                val connectionHelper = ConnectionHelper()
+                val connect = connectionHelper.connectionClass()
+                if(connect!=null){
+                    val query="SELECT * FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.email = '$email' AND w.Termin = CURRENT_DATE + INTERVAL '2 day';"
+                    val statement = connect.createStatement()
+                    val result = statement.executeQuery(query)
+                    while(result.next()){
+                        lista.add(
+                            mutableListOf(result.getInt("Id_wywozu").toString(), result.getString("Rodzaj"), result.getString("Termin"))
+                        )
+                    }
+                }
+            }catch (ex:Exception){
+                Log.e("ErrorPowiadomienie", ex.message?: "Nieznany błąd ")
+            }
+
+            for (lista2 in lista){
+                powiadomienie(lista2)
+            }
+
+
             zapisaneDane.dodajPowiadomienie()
 
         } else {
@@ -147,7 +171,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_settings -> startActivity(intent_userpanel)
                 R.id.nav_about -> Toast.makeText(applicationContext, "S2MZ", Toast.LENGTH_SHORT).show()
                 //wylogowywanie
-                R.id.nav_logout -> startActivity(intent_rejestracja)
+                R.id.nav_logout -> {
+                    zapisaneDane.zalogowany(false)
+                    startActivity(intent_rejestracja)
+                }
                 }
             true
         }
@@ -162,6 +189,45 @@ class MainActivity : AppCompatActivity() {
                 return datePart
             }
         }
+
+        //Zasady wyrzucania smieci
+
+        val zasadyBio = findViewById<TextView>(R.id.ZasadySegregacjiBioOpis)
+        findViewById<LinearLayout>(R.id.ZasadySegregacjiBioTytul).setOnClickListener {
+            if(zasadyBio.visibility==LinearLayout.GONE){
+                zasadyBio.visibility= LinearLayout.VISIBLE
+            } else {
+                zasadyBio.visibility = LinearLayout.GONE
+            }
+        }
+
+        val zasadyMetale = findViewById<TextView>(R.id.ZasadySegregacjiMetaleOpis)
+        findViewById<LinearLayout>(R.id.ZasadySegregacjiMetaleTytul).setOnClickListener {
+            if(zasadyMetale.visibility==LinearLayout.GONE){
+                zasadyMetale.visibility = LinearLayout.VISIBLE
+            } else {
+                zasadyMetale.visibility = LinearLayout.GONE
+            }
+        }
+
+        val zasadySzklo = findViewById<TextView>(R.id.ZasadySegregacjiSzkloOpis)
+        findViewById<LinearLayout>(R.id.ZasadySegregacjiSzkloTytul).setOnClickListener {
+            if(zasadySzklo.visibility == LinearLayout.GONE){
+                zasadySzklo.visibility = LinearLayout.VISIBLE
+            } else {
+                zasadySzklo.visibility = LinearLayout.GONE
+            }
+        }
+
+        val zasadyPapiery = findViewById<TextView>(R.id.ZasadySegregacjiPapieryOpis)
+        findViewById<LinearLayout>(R.id.ZasadySegregacjiPapieryTytul).setOnClickListener {
+            if(zasadyPapiery.visibility == LinearLayout.GONE){
+                zasadyPapiery.visibility = LinearLayout.VISIBLE
+            } else {
+                zasadyPapiery.visibility = LinearLayout.GONE
+            }
+        }
+
 
         val formatDaty = DateTimeFormatter.ofPattern("dd-MM-yyyy")
 
@@ -224,13 +290,13 @@ class MainActivity : AppCompatActivity() {
             val connectionHelper = ConnectionHelper()
             val connect = connectionHelper.connectionClass()
             if(connect!= null){
-                val queryPapier = "SELECT w.Termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika' AND rw.Rodzaj = 'Papier' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1;"
+                val queryPapier = "SELECT w.Termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.email = '$email' AND rw.Rodzaj = 'Papier' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1;"
 
-                val queryMetal = "SELECT w.Termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika' AND rw.Rodzaj = 'Metale i tworzywa sztuczne' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1;"
+                val queryMetal = "SELECT w.Termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.email = '$email' AND rw.Rodzaj = 'Metale i tworzywa sztuczne' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1;"
 
-                val querySzklo = "SELECT w.Termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika' AND rw.Rodzaj = 'Szkło' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1;"
+                val querySzklo = "SELECT w.Termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.email = '$email' AND rw.Rodzaj = 'Szkło' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1;"
 
-                val queryBio = "SELECT w.Termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika' AND rw.Rodzaj = 'Odpady Bio' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1;"
+                val queryBio = "SELECT w.Termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.email = '$email' AND rw.Rodzaj = 'Odpady Bio' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1;"
 
                 val statement = connect.createStatement()
                 var result = statement.executeQuery(queryPapier)
@@ -276,23 +342,28 @@ class MainActivity : AppCompatActivity() {
         return false
     }
 
-    private fun powiadomienie() {
+    private fun powiadomienie(lista : MutableList<String>) {
         checkExactAlarmPermission()
+
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        var termin = LocalDate.parse(lista[2], formatter)
+
         val intent = Intent(applicationContext, Powiadomienia::class.java)
         // tytuł i tekst powiadomienia
-        val title = "E żydzie!"
-        val message = "Czas na piec ;D"
+        val title = "Wystaw ${lista[1]}"
+        val message = "Jutro $termin wywożą ${lista[1]}, nie zapomnij wystawić kosza"
         intent.putExtra(titleExtra, title)
         intent.putExtra(messageExtra, message)
         val pendingIntent = PendingIntent.getBroadcast(
             applicationContext,
-            iloscPowi,
+            lista[0].toInt(),
             intent,
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
 
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val time = getTime()
+        termin = termin.minusDays(1)
+        val time = getTime(termin)
         alarmManager.setExactAndAllowWhileIdle(
             AlarmManager.RTC_WAKEUP,
             time,
@@ -300,13 +371,13 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun getTime(): Long{
+    private fun getTime(termin:LocalDate): Long{
         //ustawienie kiedy powiadomienie
         val minute = 0
-        val hour = 9
-        val day = 13
-        val month = 11
-        val year = 2024
+        val hour = 16
+        val day = termin.dayOfMonth
+        val month = termin.monthValue
+        val year = termin.year
 
         val calendar = Calendar.getInstance()
         calendar.set(year, month - 1, day, hour, minute)

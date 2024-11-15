@@ -3,8 +3,10 @@ package com.example.smieci
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -44,7 +46,7 @@ class EdytowanieInformacji : AppCompatActivity() {
         niesegregujacy = findViewById(R.id.niesegregujacy)
 
         var edytowanieInformacji = findViewById<ConstraintLayout>(R.id.ekranEdycjaInformacji)
-        edytowanieInformacji.minHeight= wysokoscEkranu
+        edytowanieInformacji.minHeight = wysokoscEkranu
 
         val zapisaneDane = ObslugaPrzechowywaniaDanych(this)
 
@@ -57,56 +59,113 @@ class EdytowanieInformacji : AppCompatActivity() {
             startActivity(intent_userPanel)
         }
 
-        zamieszkaly.setOnCheckedChangeListener{ _, isChecked ->
-            if(isChecked){
+        var rodzajZamieszkania : String = ""
+        var rodzinaRodzaj : String? = null
+        var rodzajWP : String? = null
+        var rodzajSegregacji : String = ""
+
+        zamieszkaly.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
                 niezamieszkaly.isChecked = false
                 waliduj()
+                rodzajZamieszkania = "zamieszkała"
+
+            } else {
+                rodzinaRodzaj = null
+                rodzajWP = null
             }
         }
         niezamieszkaly.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
+            if (isChecked) {
                 zamieszkaly.isChecked = false
                 waliduj()
+                rodzajZamieszkania = "niezamieszkała"
+                rodzinaRodzaj = null
+                rodzajWP = null
             }
         }
         jednorodzinna.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 wielorodzinna.isChecked = false
                 waliduj()
+                rodzinaRodzaj = jednorodzinna.text.toString()
+                rodzajWP = null
             }
         }
         wielorodzinna.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 jednorodzinna.isChecked = false
                 waliduj()
+                rodzinaRodzaj = wielorodzinna.text.toString()
+            }else{
+                rodzajWP = null
             }
         }
-        wysoka.setOnCheckedChangeListener{_, isChecked ->
-            if(isChecked){
+        wysoka.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
                 pozostale.isChecked = false
                 waliduj()
+                rodzajWP = wysoka.text.toString()
             }
         }
-        pozostale.setOnCheckedChangeListener{_, isChecked ->
-            if(isChecked){
+        pozostale.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
                 wysoka.isChecked = false
                 waliduj()
+                rodzajWP = pozostale.text.toString()
             }
         }
         segregujacy.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 niesegregujacy.isChecked = false
+                rodzajSegregacji = segregujacy.text.toString()
             }
         }
         niesegregujacy.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
+            if (isChecked) {
                 segregujacy.isChecked = false
+                rodzajSegregacji = niesegregujacy.text.toString()
             }
         }
 
         findViewById<ToggleButton>(R.id.toggleLokalizacja).setOnClickListener {
             var intent_edytowanieLokalizacji = Intent(this, EdytowanieLokalizacji::class.java)
             startActivity(intent_edytowanieLokalizacji)
+        }
+
+        findViewById<Button>(R.id.buttonSubmit).setOnClickListener {
+            if(walidacja()){
+                try {
+                    val connectionHelper = ConnectionHelper()
+                    val connect = connectionHelper.connectionClass()
+                    if (connect != null) {
+                        var query: String
+                        when {
+                            rodzinaRodzaj == null -> {
+                                query = "SELECT id_rodzaj_zamieszkania FROM Rodzaj_zamieszkania WHERE zamieszkanie = '$rodzajZamieszkania' AND typ_rodziny is null AND typ_wysoka is null AND segregacja = '$rodzajSegregacji'"
+                            }
+                            rodzajWP == null -> {
+                                query = "SELECT id_rodzaj_zamieszkania FROM Rodzaj_zamieszkania WHERE zamieszkanie = '$rodzajZamieszkania' AND typ_rodziny = '$rodzinaRodzaj' AND typ_wysoka is null AND segregacja = '$rodzajSegregacji'"
+                            }
+                            else -> {
+                                query = "SELECT id_rodzaj_zamieszkania FROM Rodzaj_zamieszkania WHERE zamieszkanie = '$rodzajZamieszkania' AND typ_rodziny = '$rodzinaRodzaj' AND typ_wysoka = '$rodzajWP' AND segregacja = '$rodzajSegregacji'"
+                            }
+                        }
+                        val statement = connect.createStatement()
+                        var result = statement.executeQuery(query)
+                        if(result.next()){
+                            query = "UPDATE Uzytkownik SET id_rodzaj_zamieszkania = ${result.getInt("id_rodzaj_zamieszkania")} WHERE email = '$email'"
+                            connect.prepareStatement(query).executeUpdate()
+                            Toast.makeText(this, "Zmieniono informacje", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                } catch (ex:Exception){
+                    Log.e("ErrorZapiszEdycjeInformacji", ex.message?: "Nieznany błąd")
+                }
+            } else {
+                Toast.makeText(this, "Wypełnij wszystkie pola", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
     }
@@ -173,6 +232,30 @@ class EdytowanieInformacji : AppCompatActivity() {
             jednorodzinna.isChecked = false
             findViewById<LinearLayout>(R.id.wp).visibility = LinearLayout.GONE
             wielorodzinna.isChecked = false
+        }
+    }
+
+    private fun walidacja() : Boolean{
+        if(segregujacy.isChecked || niesegregujacy.isChecked){
+            if(zamieszkaly.isChecked){
+                if(wielorodzinna.isChecked){
+                    if(wysoka.isChecked || pozostale.isChecked){
+                        return true
+                    } else {
+                        return false
+                    }
+                } else if(jednorodzinna.isChecked) {
+                    return true
+                } else {
+                    return false
+                }
+            } else if(niezamieszkaly.isChecked){
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
         }
     }
 }

@@ -50,8 +50,8 @@ class DodawanieLokalizacji : AppCompatActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val LOCATION_PERMISSION_REQUEST_CODE = 100
 
-    lateinit var miejscowosc : String
-    lateinit var ulica : String
+    var miejscowosc : String? = null
+    var ulica : String? = null
 
     lateinit var nazwaUzytkownika : String
     lateinit var email : String
@@ -60,6 +60,10 @@ class DodawanieLokalizacji : AppCompatActivity() {
     lateinit var rodzinaRodzaj : String
     lateinit var rodzajWP : String
     lateinit var rodzajSegregacji : String
+
+    var gminy : MutableSet<String> = mutableSetOf()
+    var miejscowosci : MutableSet<String> = mutableSetOf()
+    var ulice : MutableSet<String> = mutableSetOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -160,7 +164,9 @@ class DodawanieLokalizacji : AppCompatActivity() {
 
 
         //lista gminy
-        var gminy = arrayOf<String>("Gmina")
+        wypelnianieGmin()
+        val gminy = gminy.toTypedArray()
+
 
         val adapter: ArrayAdapter<String?> = ArrayAdapter<String?>(
             this@DodawanieLokalizacji,
@@ -173,7 +179,6 @@ class DodawanieLokalizacji : AppCompatActivity() {
 
         val textGmina = findViewById<EditText>(R.id.editText_Gmina)
         val textGminaParent = findViewById<LinearLayout>(R.id.listViewParentG)
-        //val gminaLayout = findViewById<LinearLayout>(R.id.layoutGminaWybierz)
 
         // Obsługa kliknięcia na textGmina - pokazanie listy
         textGmina.setOnClickListener {
@@ -226,7 +231,8 @@ class DodawanieLokalizacji : AppCompatActivity() {
         }
 
         //lista miejscowosci
-        var miejscowosci = listOf<String>("Miejscowosc")
+        wypelnienieMiejscowosci()
+        val miejscowosci = miejscowosci.toTypedArray()
 
         val adapterM: ArrayAdapter<String?> = ArrayAdapter<String?>(
             this@DodawanieLokalizacji,
@@ -287,7 +293,8 @@ class DodawanieLokalizacji : AppCompatActivity() {
         }
 
         //lista ulic
-        var ulice = arrayOf<String>("Ulica")
+        wypelnianieUlic()
+        var ulice = ulice.toTypedArray()
 
         val adapterU: ArrayAdapter<String?> = ArrayAdapter<String?>(
             this@DodawanieLokalizacji,
@@ -336,15 +343,58 @@ class DodawanieLokalizacji : AppCompatActivity() {
             }
         })
 
-
-
-
-
-
-
-
     }
 
+    private fun wypelnianieGmin(){
+        try {
+            val connectionHelper = ConnectionHelper()
+            val connect = connectionHelper.connectionClass()
+            if(connect!=null){
+                val query = "SELECT Nazwa_gminy FROM Gminy ORDER BY Nazwa_gminy ASC"
+                val statement = connect.createStatement()
+                val result = statement.executeQuery(query)
+                while(result.next()){
+                    gminy.add(result.getString("Nazwa_gminy"))
+                }
+            }
+        }catch (ex: Exception){
+            Log.e("ErrorGminyArray", ex.message?: "Nieznany błąd")
+        }
+    }
+
+    private fun wypelnienieMiejscowosci(){
+        try {
+            val connectionHelper = ConnectionHelper()
+            val connet = connectionHelper.connectionClass()
+            if(connet!=null){
+                val query = "SELECT Nazwa_miejscowosci FROM Miejscowosc ORDER BY Nazwa_miejscowosci ASC"
+                val statement = connet.createStatement()
+                val result = statement.executeQuery(query)
+                while(result.next()){
+                    miejscowosci.add(result.getString("Nazwa_miejscowosci"))
+                }
+            }
+        }catch (ex: Exception){
+            Log.e("ErrorMiejscowosciArray", ex.message?: "Nieznany błąd")
+        }
+    }
+
+    private fun wypelnianieUlic(){
+        try {
+            val connectionHelper = ConnectionHelper()
+            val connect = connectionHelper.connectionClass()
+            if(connect!=null){
+                var query = "SELECT Nazwa_ulicy FROM Ulice ORDER BY Nazwa_ulicy ASC"
+                val statement = connect.createStatement()
+                val result = statement.executeQuery(query)
+                while(result.next()){
+                    ulice.add(result.getString("Nazwa_ulicy"))
+                }
+            }
+        }catch (ex:Exception){
+            Log.e("ErrorUliceArray", ex.message?: "Nieznany błąd")
+        }
+    }
 
     private fun walidujDaneZamieszkania() : Int?{
         try {
