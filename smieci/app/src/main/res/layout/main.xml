@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
     tools:context=".MainActivity"
-
+    android:background="@color/white"
     android:fitsSystemWindows="true"
     >
 
@@ -24,15 +24,16 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="50dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
+            app:title=" "
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:navigationIcon="@drawable/user_icon_vector"
-
+            android:background="@color/dark_gray"
             >
 
         </androidx.appcompat.widget.Toolbar>
@@ -50,6 +51,7 @@
             android:layout_height="wrap_content"
             android:text="@string/NajblizszyWywoz"
             android:textSize="26sp"
+            android:layout_marginStart="10dp"
             android:textColor="@color/gray_text"
             android:textFontWeight="700"/>
 
@@ -287,9 +289,7 @@
                     android:layout_gravity="bottom"
                     android:layout_marginTop="20dp"
                     android:layout_marginStart="5dp"
-                    >
-
-                </ImageView>
+                    />
 
             </LinearLayout>
 
@@ -363,13 +363,25 @@
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
         -->
-
-        <CalendarView
-            android:id="@+id/calendar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            >
+            <CalendarView
+                android:id="@+id/calendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/kalendarz_bg"
+                android:layout_margin="10dp"
+                android:elevation="5dp"
+                android:theme="@style/CalenderViewCustom"
+                android:dateTextAppearance="@style/CalenderViewDateCustomText"
+                android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
+                />
+        </LinearLayout>
 
 
+        <!--
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -398,7 +410,7 @@
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+        -->
         <!-- Poprzednie zasady segregacji
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -502,6 +514,7 @@
                     android:layout_marginStart="20dp"
                     android:textSize="22sp"
                     android:textFontWeight="600"
+                    android:textColor="@color/gray_text"
                     />
                 <ImageView
                     android:id="@+id/ZasadySegregacjiBioImg"
@@ -512,6 +525,7 @@
                     android:layout_weight="1"
                     android:layout_marginEnd="20dp"
                     android:src="@drawable/down"
+                    android:textColor="@color/gray_text"
                     />
             </LinearLayout>
 
@@ -524,7 +538,8 @@
                     android:textFontWeight="500"
                     android:paddingHorizontal="15dp"
                     android:paddingBottom="20dp"
-                    android:visibility="visible"/>
+                    android:visibility="visible"
+                    android:textColor="@color/gray_text"/>
 
 
             </LinearLayout>
@@ -558,6 +573,7 @@
                         android:layout_marginStart="20dp"
                         android:textSize="22sp"
                         android:textFontWeight="600"
+                        android:textColor="@color/gray_text"
                         />
                     <ImageView
                         android:id="@+id/ZasadySegregacjiMetaleImg"
@@ -568,6 +584,7 @@
                         android:layout_weight="1"
                         android:layout_marginEnd="20dp"
                         android:src="@drawable/down"
+                        android:textColor="@color/gray_text"
                         />
                 </LinearLayout>
 
@@ -580,7 +597,8 @@
                     android:textFontWeight="500"
                     android:paddingHorizontal="15dp"
                     android:paddingBottom="20dp"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    android:textColor="@color/gray_text"/>
 
 
             </LinearLayout>
@@ -612,6 +630,7 @@
                         android:layout_marginStart="20dp"
                         android:textSize="22sp"
                         android:textFontWeight="600"
+                        android:textColor="@color/gray_text"
                         />
                     <ImageView
                         android:id="@+id/ZasadySegregacjiSzkloImg"
@@ -622,6 +641,7 @@
                         android:layout_weight="1"
                         android:layout_marginEnd="20dp"
                         android:src="@drawable/down"
+                        android:textColor="@color/gray_text"
                         />
                 </LinearLayout>
 
@@ -634,7 +654,8 @@
                     android:textFontWeight="500"
                     android:paddingHorizontal="15dp"
                     android:paddingBottom="20dp"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    android:textColor="@color/gray_text"/>
 
 
             </LinearLayout>
@@ -657,6 +678,7 @@
                     android:layout_height="60dp"
                     android:orientation="horizontal"
                     android:gravity="center"
+                    android:textColor="@color/gray_text"
                     >
                     <TextView
                         android:id="@+id/ZasadySegregacjiPapieryText"
@@ -668,7 +690,7 @@
                         android:layout_marginStart="20dp"
                         android:textSize="22sp"
                         android:textFontWeight="600"
-                        />
+                        android:textColor="@color/gray_text"/>
                     <ImageView
                         android:id="@+id/ZasadySegregacjiPapieryImg"
                         android:layout_width="20dp"
@@ -678,7 +700,7 @@
                         android:layout_weight="1"
                         android:layout_marginEnd="20dp"
                         android:src="@drawable/down"
-                        />
+                        android:textColor="@color/gray_text"/>
                 </LinearLayout>
 
                 <TextView
@@ -690,7 +712,8 @@
                     android:textFontWeight="500"
                     android:paddingHorizontal="15dp"
                     android:paddingBottom="20dp"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    android:textColor="@color/gray_text"/>
 
 
             </LinearLayout>
@@ -715,7 +738,8 @@
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nawigacja"
         app:itemIconTint="@color/dark_gray"
-        app:itemTextColor="@color/dark_green_bg">
+        app:itemTextColor="@color/dark_green_bg"
+        android:background="@color/white" >
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

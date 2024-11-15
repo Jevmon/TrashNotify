@@ -36,15 +36,9 @@ import com.example.smieci.databinding.DodawanieLokalizacjiBinding
 import com.example.smieci.databinding.WyszukiwanieBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import android.location.Location
 import android.util.Log
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.search.SearchBar
 import org.w3c.dom.Text
 import com.google.android.material.internal.ViewUtils.hideKeyboard
@@ -177,7 +171,7 @@ class DodawanieLokalizacji : AppCompatActivity() {
         adapter.notifyDataSetChanged()
 
 
-        val textGmina = findViewById<EditText>(R.id.textGminaWybierz)
+        val textGmina = findViewById<EditText>(R.id.editText_Gmina)
         val textGminaParent = findViewById<LinearLayout>(R.id.listViewParentG)
         val gminaLayout = findViewById<LinearLayout>(R.id.layoutGminaWybierz)
 
@@ -242,7 +236,7 @@ class DodawanieLokalizacji : AppCompatActivity() {
         listviewMiejc.adapter = adapterM
         adapterM.notifyDataSetChanged()
 
-        val textMiejsc = findViewById<EditText>(R.id.textMiejscowoscWybierz)
+        val textMiejsc = findViewById<EditText>(R.id.editTextMiejscowosc)
         val textMiejscParent = findViewById<LinearLayout>(R.id.listViewParentM)
         val textMiejscLayout= findViewById<LinearLayout>(R.id.layoutMiejscWybierz)
 
@@ -303,7 +297,7 @@ class DodawanieLokalizacji : AppCompatActivity() {
         listviewUlice.adapter = adapterU
         adapterU.notifyDataSetChanged()
 
-        val textUlica = findViewById<EditText>(R.id.textUlicaWybierz)
+        val textUlica = findViewById<EditText>(R.id.editTextUlica)
         val textUlicaParent = findViewById<LinearLayout>(R.id.listViewParentU)
         val textUlicaLayout = findViewById<LinearLayout>(R.id.layoutUlicaWybierz)
 
