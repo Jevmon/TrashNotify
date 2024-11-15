@@ -74,8 +74,6 @@ class MainActivity : AppCompatActivity() {
         binding = MainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
         //Funkcja tworząca globalną zmienną
         val displayMetrics  = resources.displayMetrics
         val screenHeight = displayMetrics.heightPixels
@@ -84,6 +82,13 @@ class MainActivity : AppCompatActivity() {
         val zapisaneDane = ObslugaPrzechowywaniaDanych(this)
         nazwaUzytkownika = zapisaneDane.nazwaUzytkownika()!!
         iloscPowi = zapisaneDane.iloscPowiadomien()
+
+        val intent_rejestracja = Intent(this, Rejestracja::class.java)
+
+        //Obsługa zalogowania
+        if(!zapisaneDane.czyZalogowany()){
+            startActivity(intent_rejestracja)
+        }
 
         //Nazwa uzytkownika
 
@@ -132,7 +137,6 @@ class MainActivity : AppCompatActivity() {
        // toolbar.setNavigationIcon(R.drawable.user_icon_vector)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val intent_rejestracja = Intent(this, Rejestracja::class.java)
 
         navigationView.setNavigationItemSelectedListener {
             when(it.itemId){
@@ -225,13 +229,13 @@ class MainActivity : AppCompatActivity() {
             val connectionHelper = ConnectionHelper()
             val connect = connectionHelper.connectionClass()
             if(connect!= null){
-                val queryPapier = "SELECT t.termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN (SELECT termin FROM Wywozy AS w JOIN Rodzaj_wywozu AS rw ON w.Rodzaj_id = rw.id_rodzaju WHERE rw.Rodzaj = 'Metale i tworzywa sztuczne' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1) t ON w.Termin = t.termin INNER JOIN Lokalizacja l ON w.id_ulicy = l.id_ulicy AND w.id_miejscowosci = l.id_miejscowosci INNER JOIN Lokalizacja l2 ON l2.id_lokalizacji = (SELECT l3.id_lokalizacji FROM Uzytkownik u INNER JOIN Lokalizacja l3 ON u.id_lokalizacji = l3.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika') WHERE l.id_ulicy = l2.id_ulicy AND l.id_miejscowosci = l2.id_miejscowosci AND w.Termin > CURRENT_DATE AND rw.Rodzaj = 'Papier' ORDER BY w.Termin LIMIT 1;"
+                val queryPapier = "SELECT w.Termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika' AND rw.Rodzaj = 'Papier' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1;"
 
-                val queryMetal = "SELECT t.termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN (SELECT termin FROM Wywozy AS w JOIN Rodzaj_wywozu AS rw ON w.Rodzaj_id = rw.id_rodzaju WHERE rw.Rodzaj = 'Metale i tworzywa sztuczne' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1) t ON w.Termin = t.termin INNER JOIN Lokalizacja l ON w.id_ulicy = l.id_ulicy AND w.id_miejscowosci = l.id_miejscowosci INNER JOIN Lokalizacja l2 ON l2.id_lokalizacji = (SELECT l3.id_lokalizacji FROM Uzytkownik u INNER JOIN Lokalizacja l3 ON u.id_lokalizacji = l3.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika') WHERE l.id_ulicy = l2.id_ulicy AND l.id_miejscowosci = l2.id_miejscowosci AND w.Termin > CURRENT_DATE AND rw.Rodzaj = 'Metale i tworzywa sztuczne' ORDER BY w.Termin LIMIT 1;"
+                val queryMetal = "SELECT w.Termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika' AND rw.Rodzaj = 'Metale i tworzywa sztuczne' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1;"
 
-                val querySzklo = "SELECT t.termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN (SELECT termin FROM Wywozy AS w JOIN Rodzaj_wywozu AS rw ON w.Rodzaj_id = rw.id_rodzaju WHERE rw.Rodzaj = 'Metale i tworzywa sztuczne' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1) t ON w.Termin = t.termin INNER JOIN Lokalizacja l ON w.id_ulicy = l.id_ulicy AND w.id_miejscowosci = l.id_miejscowosci INNER JOIN Lokalizacja l2 ON l2.id_lokalizacji = (SELECT l3.id_lokalizacji FROM Uzytkownik u INNER JOIN Lokalizacja l3 ON u.id_lokalizacji = l3.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika') WHERE l.id_ulicy = l2.id_ulicy AND l.id_miejscowosci = l2.id_miejscowosci AND w.Termin > CURRENT_DATE AND rw.Rodzaj = 'Szkło' ORDER BY w.Termin LIMIT 1;"
+                val querySzklo = "SELECT w.Termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika' AND rw.Rodzaj = 'Szkło' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1;"
 
-                val queryBio = "SELECT t.termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN (SELECT termin FROM Wywozy AS w JOIN Rodzaj_wywozu AS rw ON w.Rodzaj_id = rw.id_rodzaju WHERE rw.Rodzaj = 'Metale i tworzywa sztuczne' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1) t ON w.Termin = t.termin INNER JOIN Lokalizacja l ON w.id_ulicy = l.id_ulicy AND w.id_miejscowosci = l.id_miejscowosci INNER JOIN Lokalizacja l2 ON l2.id_lokalizacji = (SELECT l3.id_lokalizacji FROM Uzytkownik u INNER JOIN Lokalizacja l3 ON u.id_lokalizacji = l3.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika') WHERE l.id_ulicy = l2.id_ulicy AND l.id_miejscowosci = l2.id_miejscowosci AND w.Termin > CURRENT_DATE AND rw.Rodzaj = 'Odpady Bio' ORDER BY w.Termin LIMIT 1;"
+                val queryBio = "SELECT w.Termin FROM Wywozy w JOIN Rodzaj_wywozu rw ON w.Rodzaj_id = rw.id_rodzaju JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika' AND rw.Rodzaj = 'Odpady Bio' AND w.Termin > CURRENT_DATE ORDER BY w.Termin LIMIT 1;"
 
                 val statement = connect.createStatement()
                 var result = statement.executeQuery(queryPapier)
@@ -340,7 +344,7 @@ class MainActivity : AppCompatActivity() {
             val connectionHelper = ConnectionHelper()
             val connect = connectionHelper.connectionClass()
             if(connect!= null){
-                val query = "SELECT w.* FROM Wywozy w INNER JOIN Lokalizacja l ON w.id_ulicy = l.id_ulicy AND w.id_miejscowosci = l.id_miejscowosci INNER JOIN Lokalizacja l2 ON l2.id_lokalizacji = ( SELECT l3.id_lokalizacji FROM Uzytkownik u INNER JOIN Lokalizacja l3 ON u.id_lokalizacji = l3.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika' ) WHERE l.id_ulicy = l2.id_ulicy AND l.id_miejscowosci = l2.id_miejscowosci;"
+                val query = "SELECT w.* FROM Wywozy w JOIN Lokalizacja l ON w.id_lokalizacji = l.id_lokalizacji JOIN Uzytkownik u ON u.id_lokalizacji = l.id_lokalizacji WHERE u.Nazwa_uzytkownika = '$nazwaUzytkownika';"
                 val statement = connect.createStatement()
                 val result = statement.executeQuery(query)
                 while(result.next()){

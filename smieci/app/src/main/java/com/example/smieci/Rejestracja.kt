@@ -25,22 +25,16 @@ class Rejestracja : AppCompatActivity() {
         var ekranRejestracji = findViewById<ConstraintLayout>(R.id.EkranRejestracji)
         ekranRejestracji.minHeight= wysokoscEkranu
 
-        val zapisaneDane = ObslugaPrzechowywaniaDanych(this)
-
-
         val nazwaUzytkownika = findViewById<EditText>(R.id.editNazwaUzytkownika)
         val email = findViewById<EditText>(R.id.editTextEmail)
         val haslo = findViewById<EditText>(R.id.editTextHaslo)
         val hasloPowt = findViewById<EditText>(R.id.editTextHasloPow)
 
         findViewById<Button>(R.id.zatwierdz).setOnClickListener{
-            if(nazwaUzytkownika.text!=null){
+            if(nazwaUzytkownika.text!=null || nazwaUzytkownika.text.toString()!=""){
                 if(walidacjaEmail(email.text.toString())){
                     if(haslo.text!=null && hasloPowt.text!=null){
                         if(haslo.text.toString() == hasloPowt.text.toString()){
-
-                            zapisaneDane.zapiszNazweUzytkownika(nazwaUzytkownika.text.toString())
-                            zapisaneDane.zapiszEmail(email.text.toString())
 
                             val intent_informacje = Intent(this, DodawanieInformacji::class.java)
                             intent_informacje.putExtra("nazwaUzytkownika", nazwaUzytkownika.text.toString())

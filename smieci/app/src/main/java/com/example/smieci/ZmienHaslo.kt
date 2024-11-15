@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.smieci.databinding.ZmienHasloBinding
 import android.content.Intent
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -40,19 +41,30 @@ class ZmienHaslo : AppCompatActivity() {
 
         findViewById<Button>(R.id.zatwierdz).setOnClickListener {
             //Sprawdzenie poprawności hasła
-            if(haslo.text.toString() == zapisaneDane.Haslo()){
-                //Sprawdzenie zgodności wpisanych haseł
-                if(noweHaslo.text.toString() != powtorzNoweHaslo.text.toString()){
-                    Toast.makeText(this, "Hasła muszą być takie same!!!", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "Hasło zostałe zmienione", Toast.LENGTH_SHORT).show()
-                    zapisaneDane.zapiszHaslo(noweHaslo.text.toString())
-                    recreate()
+            try{
+                val connectionHelper = ConnectionHelper()
+                val connect = connectionHelper.connectionClass()
+                if(connect!=null){
+                    var query = "SELECT Haslo FROM Uzytkownik WHERE Email='${zapisaneDane.email()}'"
+                    val statement = connect.createStatement()
+                    var result = statement.executeQuery(query)
+                    while(result.next()){
+                        if(haslo.text.toString() == result.getString("Haslo")){
+                            if(noweHaslo.text.toString() == powtorzNoweHaslo.text.toString()){
+                                query = "UPDATE Uzytkownik SET Haslo = '${noweHaslo.text}' WHERE Email='${zapisaneDane.email()}'"
+                                connect.prepareStatement(query).executeUpdate()
+                                Toast.makeText(this,"Hasło zostało zmienione", Toast.LENGTH_SHORT).show()
+                            } else {
+                                Toast.makeText(this, "Hasła muszę być takie same", Toast.LENGTH_SHORT).show()
+                            }
+                        } else {
+                            Toast.makeText(this, "Niepoprawne hasło", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
-            } else {
-                Toast.makeText(this, "Niepoprawne hasło!!!", Toast.LENGTH_SHORT).show()
+            } catch (ex : Exception){
+                Log.e("ErrorZamianaHasła", ex.message?: "Nieznany błąd")
             }
-
         }
 
     }
