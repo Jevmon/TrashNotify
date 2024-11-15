@@ -18,9 +18,13 @@
         android:theme="@style/Theme.Smieci"
         tools:targetApi="31">
         <activity
+            android:name=".Wyszukiwanie"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
             android:name=".EdytowanieLokalizacji"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".ZmienHaslo"
             android:exported="false"
@@ -60,7 +64,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".Powiadomienia" android:enabled="true"/>
+
+        <receiver
+            android:name=".Powiadomienia"
+            android:enabled="true" />
     </application>
 
 </manifest>

@@ -32,8 +32,6 @@
     </string>
 
 
-
-
     <!-- Rejestracja -->
     <string name="zarejestruj">Zarejetruj się</string>
     <string name="konto">Masz już konto?</string>
@@ -117,5 +115,6 @@
     <string name="open">Otwórz</string>
     <string name="close">Zamknij</string>
 
+    <string name="wyszukiwanie">Wyszukaj...</string>
 
 </resources>

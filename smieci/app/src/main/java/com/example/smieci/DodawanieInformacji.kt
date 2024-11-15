@@ -40,6 +40,8 @@ class DodawanieInformacji : AppCompatActivity() {
 
         //Tworzenie ToggleButton'ów Wysoka-Pozostałe
 
+
+
         var linearLayoutWP = LinearLayout(this).apply {
             id = View.generateViewId()
             setBackgroundResource(R.drawable.toggle_options_bg)

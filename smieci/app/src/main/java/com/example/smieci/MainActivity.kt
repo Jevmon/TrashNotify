@@ -42,6 +42,9 @@ import android.os.Message
 import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import android.view.MenuItem
+import android.widget.LinearLayout
+import android.widget.PopupWindow
+import androidx.appcompat.app.AppCompatDelegate
 
 
 class MainActivity : AppCompatActivity() {
@@ -58,10 +61,14 @@ class MainActivity : AppCompatActivity() {
 
     private var iloscPowi : Int = 0;
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         //Funkcja tworząca globalną zmienną
         val displayMetrics  = resources.displayMetrics
@@ -70,6 +77,11 @@ class MainActivity : AppCompatActivity() {
 
         val zapisaneDane = ObslugaPrzechowywaniaDanych(this)
         iloscPowi = zapisaneDane.iloscPowiadomien()
+
+        //tymczasowy layout - add lokalizacja
+        val intent_lokalizacja = Intent(this, DodawanieLokalizacji::class.java)
+        startActivity(intent_lokalizacja)
+
 
 
         //Obsługa powiadomień

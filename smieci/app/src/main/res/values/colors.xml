@@ -31,4 +31,7 @@
 
     <!-- Kolory do bloczków -->
     <color name="papier_border">#81C3FA</color>
+    <color name="metal_border">#FAEC81</color>
+    <color name="szklo_border">#8FE16B</color>
+    <color name="bio_border">#D1A06F</color>
 </resources>

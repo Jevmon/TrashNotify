@@ -1,47 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="250dp"
-    android:layout_height="350dp"
+    android:layout_width="260dp"
+    android:layout_height="wrap_content"
     android:background="@drawable/wyszukiwanie_bg"
+    android:elevation="5dp"
+    tools:context=".Wyszukiwanie"
+    android:orientation="vertical"
     >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+
+    <!--<android.widget.SearchView
+        android:id="@+id/searchview"
+        android:layout_width="240dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/pole_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:elevation="5dp"
+        android:queryHint="@string/wyszukiwanie"
+        android:iconifiedByDefault="false"
+        />
+        -->
 
-        <android.widget.SearchView
-            android:id="@+id/searchview"
+        <LinearLayout
+            android:id="@+id/listViewParent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@color/gray"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            />
+            android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_below="@id/searchview"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="70dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            >
+            <ListView
+                android:id="@+id/list_View"
+                android:layout_width="243dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:visibility="visible">
 
-        </ListView>
+            </ListView>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+        </LinearLayout>
+
+</LinearLayout>
