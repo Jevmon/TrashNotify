@@ -538,7 +538,7 @@
                     android:textFontWeight="500"
                     android:paddingHorizontal="15dp"
                     android:paddingBottom="20dp"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:textColor="@color/gray_text"/>
 
 
@@ -577,7 +577,7 @@
                         />
                     <ImageView
                         android:id="@+id/ZasadySegregacjiMetaleImg"
-                        android:layout_width="20dp"
+                        android:layout_width="60dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center_vertical"
                         android:layout_alignParentRight="true"
@@ -589,6 +589,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/ZasadySegregacjiMetaleOpis"
                     android:layout_marginTop="0dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -47,6 +47,7 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.graphics.toColor
+import org.w3c.dom.Text
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.time.Month
@@ -147,7 +148,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_settings -> startActivity(intent_userpanel)
                 R.id.nav_about -> Toast.makeText(applicationContext, "ab", Toast.LENGTH_SHORT).show()
                 //wylogowywanie
-                R.id.nav_logout -> startActivity(intent_rejestracja)
+                R.id.nav_logout -> {
+                    zapisaneDane.zalogowany(false)
+                    startActivity(intent_rejestracja)
+                }
                 }
             true
         }
@@ -162,6 +166,45 @@ class MainActivity : AppCompatActivity() {
                 return datePart
             }
         }
+
+        //Zasady wyrzucania smieci
+
+        val zasadyBio = findViewById<TextView>(R.id.ZasadySegregacjiBioOpis)
+        findViewById<LinearLayout>(R.id.ZasadySegregacjiBioTytul).setOnClickListener {
+            if(zasadyBio.visibility==LinearLayout.GONE){
+                zasadyBio.visibility= LinearLayout.VISIBLE
+            } else {
+                zasadyBio.visibility = LinearLayout.GONE
+            }
+        }
+
+        val zasadyMetale = findViewById<TextView>(R.id.ZasadySegregacjiMetaleOpis)
+        findViewById<LinearLayout>(R.id.ZasadySegregacjiMetaleTytul).setOnClickListener {
+            if(zasadyMetale.visibility==LinearLayout.GONE){
+                zasadyMetale.visibility = LinearLayout.VISIBLE
+            } else {
+                zasadyMetale.visibility = LinearLayout.GONE
+            }
+        }
+
+        val zasadySzklo = findViewById<TextView>(R.id.ZasadySegregacjiSzkloOpis)
+        findViewById<LinearLayout>(R.id.ZasadySegregacjiSzkloTytul).setOnClickListener {
+            if(zasadySzklo.visibility == LinearLayout.GONE){
+                zasadySzklo.visibility = LinearLayout.VISIBLE
+            } else {
+                zasadySzklo.visibility = LinearLayout.GONE
+            }
+        }
+
+        val zasadyPapiery = findViewById<TextView>(R.id.ZasadySegregacjiPapieryOpis)
+        findViewById<LinearLayout>(R.id.ZasadySegregacjiPapieryTytul).setOnClickListener {
+            if(zasadyPapiery.visibility == LinearLayout.GONE){
+                zasadyPapiery.visibility = LinearLayout.VISIBLE
+            } else {
+                zasadyPapiery.visibility = LinearLayout.GONE
+            }
+        }
+
 
         val formatDaty = DateTimeFormatter.ofPattern("dd-MM-yyyy")
 
