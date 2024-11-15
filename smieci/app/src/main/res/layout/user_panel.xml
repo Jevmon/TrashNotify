@@ -130,6 +130,8 @@
                     />
             </LinearLayout>
 
+
+            <!--
             <LinearLayout
                 android:id="@+id/motywLayout"
                 android:layout_width="350dp"
@@ -164,7 +166,7 @@
 
                     />
             </LinearLayout>
-
+            -->
 
             <LinearLayout
                 android:id="@+id/EdytujAdresZamieszakniaLayout"
