@@ -173,10 +173,10 @@ class DodawanieLokalizacji : AppCompatActivity() {
 
         val textGmina = findViewById<EditText>(R.id.editText_Gmina)
         val textGminaParent = findViewById<LinearLayout>(R.id.listViewParentG)
-        val gminaLayout = findViewById<LinearLayout>(R.id.layoutGminaWybierz)
+        //val gminaLayout = findViewById<LinearLayout>(R.id.layoutGminaWybierz)
 
         // Obsługa kliknięcia na textGmina - pokazanie listy
-        gminaLayout.setOnClickListener {
+        textGmina.setOnClickListener {
             textGminaParent.visibility = if (textGminaParent.visibility == View.VISIBLE) View.GONE else View.VISIBLE
 
         }
@@ -226,7 +226,7 @@ class DodawanieLokalizacji : AppCompatActivity() {
         }
 
         //lista miejscowosci
-        var miejscowosci = arrayOf<String>("Miejscowosc")
+        var miejscowosci = listOf<String>("Miejscowosc")
 
         val adapterM: ArrayAdapter<String?> = ArrayAdapter<String?>(
             this@DodawanieLokalizacji,
@@ -238,10 +238,10 @@ class DodawanieLokalizacji : AppCompatActivity() {
 
         val textMiejsc = findViewById<EditText>(R.id.editTextMiejscowosc)
         val textMiejscParent = findViewById<LinearLayout>(R.id.listViewParentM)
-        val textMiejscLayout= findViewById<LinearLayout>(R.id.layoutMiejscWybierz)
+        //val textMiejscLayout= findViewById<LinearLayout>(R.id.layoutMiejscWybierz)
 
         // Obsługa kliknięcia na textGmina - pokazanie listy
-        textMiejscLayout.setOnClickListener {
+        textMiejsc.setOnClickListener {
             textMiejscParent.visibility = if (textMiejscParent.visibility == View.VISIBLE) View.GONE else View.VISIBLE
 
         }
@@ -299,10 +299,10 @@ class DodawanieLokalizacji : AppCompatActivity() {
 
         val textUlica = findViewById<EditText>(R.id.editTextUlica)
         val textUlicaParent = findViewById<LinearLayout>(R.id.listViewParentU)
-        val textUlicaLayout = findViewById<LinearLayout>(R.id.layoutUlicaWybierz)
+        //val textUlicaLayout = findViewById<LinearLayout>(R.id.layoutUlicaWybierz)
 
         // Obsługa kliknięcia na textGmina - pokazanie listy
-        textUlicaLayout.setOnClickListener {
+        textUlica.setOnClickListener {
             textUlicaParent.visibility = if (textUlicaParent.visibility == View.VISIBLE) View.GONE else View.VISIBLE
 
         }
@@ -314,7 +314,6 @@ class DodawanieLokalizacji : AppCompatActivity() {
                 textUlicaParent.visibility = View.GONE
             }
         }
-
 
         //wybieranie elementu z listy - ulice
         listviewUlice.setOnItemClickListener { parent, view, position, id ->
